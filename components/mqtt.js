@@ -2158,7 +2158,7 @@ const Mqtt = ({ board }) => {
                             <tbody style={{ textAlign: "center" }}>
                               {board.gpios[0].timers.map((timer, k) => {
                                 return (
-                                  <tr>
+                                  <tr key={timer.id}>
                                     <td>{k + 1}</td>
                                     <td>{timer.start}</td>
                                     <td>{timer.stop}</td>
@@ -2712,7 +2712,7 @@ const Mqtt = ({ board }) => {
                             <tbody style={{ textAlign: "center" }}>
                               {board.gpios[1].timers.map((timer, k) => {
                                 return (
-                                  <tr>
+                                  <tr key={timer.id}>
                                     <td>{k + 1}</td>
                                     <td>{timer.start}</td>
                                     <td>{timer.stop}</td>
@@ -3266,7 +3266,7 @@ const Mqtt = ({ board }) => {
                             <tbody style={{ textAlign: "center" }}>
                               {board.gpios[2].timers.map((timer, k) => {
                                 return (
-                                  <tr>
+                                  <tr key={timer.id}>
                                     <td>{k + 1}</td>
                                     <td>{timer.start}</td>
                                     <td>{timer.stop}</td>

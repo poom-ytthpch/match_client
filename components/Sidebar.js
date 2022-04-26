@@ -88,10 +88,7 @@ const Sidebar = ({ children }) => {
       <>
         <Head>
           <meta charSet="UTF-8" />
-          <meta
-            http-equiv="Content-Security-Policy"
-            content="upgrade-insecure-requests"
-          />
+
           <title>MATCHCHEMICAL</title>
           <link rel="icon" href="/new2.png" />
         </Head>
