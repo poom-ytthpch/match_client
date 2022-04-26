@@ -1,0 +1,317 @@
+.box_board {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+  width: 100%;
+  color: white;
+}
+
+.box_board .select {
+  border-color: #5c459b;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 200px;
+  width: 100%;
+  color: white;
+  border-radius: 10px;
+  outline-color: #5c459b;
+  background-color: #212227;
+}
+
+.box_board .select .option {
+  border-color: #5c459b;
+  color: white;
+  font-weight: bold;
+}
+
+.box_board .board {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.box_board .board .board-header {
+  background-color: #212227;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+}
+
+.box_board .board .board-header .board-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.box_board .board .board-header .board-title .board-name {
+  font-weight: normal;
+  color: #05ace3;
+  cursor: pointer;
+}
+
+.box_board .board .board-header .board-title .button-title {
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.box_board .board .board-header .board-title .set-name {
+  padding: 20px;
+  background-color: #54545c;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 300px;
+}
+
+.box_board .board .board-header .board-title .btn {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.box_board .board .board-header .board-status {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.box_board .board .board-header .board-status .online {
+  font-weight: normal;
+  color: #21c48d;
+}
+
+.box_board .board .board-header .board-status .offline {
+  font-weight: normal;
+  color: #ff5148;
+}
+
+.box_board .board .board-header .time-box {
+  font-weight: bold;
+}
+
+.box_board .board .board-header .time-box .time {
+  font-weight: normal;
+  color: #05ace3;
+}
+
+.box_board .board .button-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.box_board .board .button-box .box {
+  margin: 10px;
+  background-color: #212227;
+  color: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  min-width: 180px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.box_board .board .button-box .box .form-input {
+  border-radius: 20px;
+  padding: 6px 20px 6px 20px;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #05ace3;
+  outline: #05ace3;
+  color: white;
+  width: 100%;
+}
+
+.box_board .board .button-box .box .form-input:hover {
+  border-radius: 20px;
+  padding: 6px 20px 6px 20px;
+  color: white;
+  border-color: #5c459b;
+  width: 100%;
+}
+
+.box_board .board .button-box .box .form-input:focus {
+  border-radius: 20px;
+  padding: 6px 20px 6px 20px;
+  color: white;
+  border-color: #5c459b;
+  width: 100%;
+  outline: #5c459b;
+}
+
+.box_board .board .button-box .box .Switch {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.box_board .board .button-box .box .box-title {
+  text-align: center;
+}
+
+.box_board .board .button-box .box .box-title .button-title {
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.box_board .board .button-box .box .box-title .set-name {
+  padding: 20px;
+  background-color: #54545c;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.box_board .board .button-box .box .box-title .alert {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 10px;
+  background-color: #ff5148;
+  font-weight: bold;
+  height: 50px;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.box_board .board .button-box .box .btn {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+}
+
+.box_board .board .button-box .box #set {
+  width: 100%;
+  padding: 5px;
+  border-radius: 30px;
+  background-color: rgba(92, 69, 155, 0);
+  color: white;
+  border-color: white;
+}
+
+.box_board .board .button-box .box #set:hover {
+  color: white;
+  background-color: #212227;
+}
+
+.box_board .board .button-box .box #set:focus {
+  color: white;
+  background-color: #212227;
+}
+
+.box_board .board .button-box .box .box-form {
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  background-color: #54545c;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.box_board .board .button-box .box .box-form .timer-set {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.box_board .board .button-box .box .timer-box {
+  background-color: #48a8e4;
+  text-align: left;
+  padding: 15px;
+  color: white;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.box_board .board .button-box .box .timer-box .timer-header {
+  text-align: center;
+}
+
+.box_board .board .button-box .box .timer-box .timer-button {
+  text-align: center;
+}
+
+.box_board .board .board-box {
+  margin: 10px;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #212227;
+}
+
+.box_board .board .board-box div {
+  margin: 10px;
+}
+
+.box_board .board .board-box div .progress-box {
+  max-width: 150px;
+  min-width: 50px;
+}
+
+.box_board .board .board-box div .title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.box_board .B_online {
+  background-color: #1d9fc5;
+}
+
+.box_board .B_offline {
+  background-color: #54545c;
+}
+
+@media screen and (max-device-width: 375px) {
+  .box_board .board {
+    padding: 20px;
+  }
+}
+/*# sourceMappingURL=board.css.map */
