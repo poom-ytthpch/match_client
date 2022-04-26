@@ -15,7 +15,8 @@ const Login = () => {
 
   // const server = "https://userlogapi.herokuapp.com";
   // const server = "https://www.matchchemical.tk:57521";
-  const server = "http://localhost:4008/v1";
+  // const server = "http://localhost:4008/v1";
+  const server = "https://home420.trueddns.com:57527/v1";
 
   useEffect(() => {
     const Verify = async () => {
