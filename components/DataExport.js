@@ -74,7 +74,7 @@ const DataExport = ({
                 time: `${day}/${tMonth}/${year} ${time}`,
               });
               return (
-                <tbody>
+                <tbody key={i.device_id}>
                   <tr>
                     <td>{k + 1}</td>
                     <td>{boardId}</td>

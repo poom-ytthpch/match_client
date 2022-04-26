@@ -2302,7 +2302,7 @@ const Default = ({ board }) => {
                             <tbody style={{ textAlign: "center" }}>
                               {board.relay1Timers.map((i, k) => {
                                 return (
-                                  <tr>
+                                  <tr key={i.id}>
                                     <td>{k + 1}</td>
                                     <td>{i.startTime}</td>
                                     <td>{i.stopTime}</td>
@@ -2836,7 +2836,7 @@ const Default = ({ board }) => {
                             <tbody style={{ textAlign: "center" }}>
                               {board.relay2Timers.map((i, k) => {
                                 return (
-                                  <tr>
+                                  <tr key={i.id}>
                                     <td>{k + 1}</td>
                                     <td>{i.startTime}</td>
                                     <td>{i.stopTime}</td>
@@ -3370,7 +3370,7 @@ const Default = ({ board }) => {
                             <tbody style={{ textAlign: "center" }}>
                               {board.relay3Timers.map((i, k) => {
                                 return (
-                                  <tr>
+                                  <tr key={i.id}>
                                     <td>{k + 1}</td>
                                     <td>{i.startTime}</td>
                                     <td>{i.stopTime}</td>

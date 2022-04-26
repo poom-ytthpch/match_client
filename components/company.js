@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 const Company = ({ Company, setSelect, getBoardCompany }) => {
-
-
   return (
     <>
       {Company.map((i) => {
         return (
           <button
+            key={i.device_id}
             className="btn btn-outline-primary"
             onClick={() => (setSelect(i._id), getBoardCompany())}
           >

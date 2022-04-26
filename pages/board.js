@@ -212,7 +212,11 @@ export default function Board() {
                     >
                       {boards.map((i) => {
                         return (
-                          <MenuItem className="option" value={i.name}>
+                          <MenuItem
+                            className="option"
+                            key={i.device_id}
+                            value={i.name}
+                          >
                             {i.name}
                           </MenuItem>
                         );
