@@ -23,7 +23,7 @@ const Login = () => {
     const Verify = async () => {
       await cookieCheck();
     };
-    if (cookie.get("token")) {
+    if (cookie.get("_t_")) {
       Router.push("/dashboard");
     }
 
