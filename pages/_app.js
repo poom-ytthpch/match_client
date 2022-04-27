@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const Verify = async () => {
       await CookieCheck();
-      // await tokenCheck();
+      await tokenCheck();
 
       // await getBoard();
     };
@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
     }
   };
   const tokenCheck = async () => {
-    if (Cookies.get("token")) {
+    if (Cookies.get("_t_")) {
       await Router.push("/dashboard");
 
       await setToken(Cookies.get("token"));
