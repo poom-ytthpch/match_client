@@ -70,6 +70,14 @@ const Dashboard = () => {
   };
 
   const getDeviceDataSave = async (device_id, device_name) => {
+    const wait = Swal.fire({
+      title: "PLEASE WAIT!",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     try {
       await axios
         .get(`${server}/getDeviceDataSave/${device_id}`, {
@@ -82,9 +90,11 @@ const Dashboard = () => {
           setBoardData(res.data.model);
           setBoardId(device_id);
           setBoardName(device_name);
+          wait.close();
         });
     } catch (error) {
       console.log(error);
+      wait.close();
     }
   };
 

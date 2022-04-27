@@ -1499,7 +1499,11 @@ const Mqtt = ({ board }) => {
                       <IOSSwitch
                         sx={{ m: 1 }}
                         checked={
-                          board.sensors[1] ? board.sensors[1].state : false
+                          board.sensors[
+                            board.sensors.findIndex((i) => {
+                              return i.index === 2;
+                            })
+                          ].state
                         }
                         onChange={(e) =>
                           updateSensorState(2, !board.sensors[1].state)
