@@ -60,8 +60,11 @@ export default function Board() {
         })
         .then((res) => {
           setLoading(false);
-          if (res.data && b_Select === "") {
+          if (res.data && b_Select === "" && !Cookies.get("_device_")) {
             setB_Select(res.data.model[0].name);
+            Cookies.set("_device_", res.data.model[0].name);
+          } else {
+            setB_Select(Cookies.get("_device_"));
           }
           setBoards(res.data.model);
           if (b_Select !== "") {
@@ -155,6 +158,7 @@ export default function Board() {
       },
     });
     setB_Select(event.target.value);
+    Cookies.set("_device_", event.target.value);
   };
 
   if (loading) {
