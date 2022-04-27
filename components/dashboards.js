@@ -407,11 +407,11 @@ const MyResponsiveLine = ({ boardData, boardId }) => {
 
   avgEc = sumEc / boardData.length;
   tmpData.map((i) => {
-    if (b_name === "" && i.device_id === boardId) {
-      b_name = i.name;
+    if (b_name === "" && i.deviceId === boardId) {
+      b_name = i.deviceId;
     }
     if (max === 0) {
-      max = Number(i.ec) + 550;
+      max = Number(i.ec) + 300;
     }
     const tmpTime = i.time;
     const Time = tmpTime.split(" ");
@@ -527,8 +527,8 @@ const PhLine = ({ boardData, boardId }) => {
 
   avgPh = sumPh / boardData.length;
   tmpData.map((i) => {
-    if (b_name === "" && i.device_id === boardId) {
-      b_name = i.name;
+    if (b_name === "" && i.deviceId === boardId) {
+      b_name = i.deviceId;
     }
     if (max === 0) {
       max = Number(i.ph) + 5;
