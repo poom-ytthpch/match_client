@@ -86,7 +86,6 @@ const Dashboard = () => {
           },
         })
         .then((res) => {
-          console.log(res.data.model);
           setBoardData(res.data.model);
           setBoardId(device_id);
           setBoardName(device_name);

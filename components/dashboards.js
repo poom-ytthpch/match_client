@@ -407,6 +407,7 @@ const MyResponsiveLine = ({ boardData, boardId }) => {
 
   avgEc = sumEc / boardData.length;
   tmpData.map((i) => {
+    console.log(i.ec);
     if (b_name === "" && i.deviceId === boardId) {
       b_name = i.deviceId;
     }
@@ -424,6 +425,7 @@ const MyResponsiveLine = ({ boardData, boardId }) => {
       data: dataTmp,
     },
   ];
+  console.log(data);
   return (
     <>
       <div>
@@ -441,20 +443,22 @@ const MyResponsiveLine = ({ boardData, boardId }) => {
             type: "linear",
             min: 0,
             max: max,
-            stacked: true,
+            stacked: false,
             reverse: false,
           }}
           yFormat=" >-.2f"
+          curve="basis"
           axisTop={null}
-          axisRight={{
-            orient: "right",
+          axisRight={null}
+          axisBottom={{
+            orient: "bottom",
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 0,
-            legend: "",
-            legendOffset: 0,
+            tickRotation: -90,
+            legend: "TIME",
+            legendOffset: 36,
+            legendPosition: "middle",
           }}
-          axisBottom={null}
           axisLeft={{
             orient: "left",
             tickSize: 5,
@@ -465,16 +469,40 @@ const MyResponsiveLine = ({ boardData, boardId }) => {
             legendPosition: "middle",
           }}
           enableGridX={false}
-          colors={{ scheme: "purple_orange" }}
           enablePoints={false}
+          colors={{ scheme: "purple_orange" }}
           pointSize={10}
           pointColor={{ theme: "background" }}
           pointBorderWidth={2}
           pointBorderColor={{ from: "serieColor" }}
           pointLabelYOffset={-12}
-          enableArea={true}
-          isInteractive={false}
-          legends={[]}
+          useMesh={true}
+          legends={[
+            {
+              anchor: "bottom-right",
+              direction: "column",
+              justify: false,
+              translateX: 100,
+              translateY: 0,
+              itemsSpacing: 0,
+              itemDirection: "left-to-right",
+              itemWidth: 80,
+              itemHeight: 20,
+              itemOpacity: 0.75,
+              symbolSize: 12,
+              symbolShape: "circle",
+              symbolBorderColor: "rgba(0, 0, 0, .5)",
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemBackground: "rgba(0, 0, 0, .03)",
+                    itemOpacity: 1,
+                  },
+                },
+              ],
+            },
+          ]}
         />
       </div>
 
@@ -561,40 +589,66 @@ const PhLine = ({ boardData, boardId }) => {
             type: "linear",
             min: 0,
             max: max,
-            stacked: true,
+            stacked: false,
             reverse: false,
           }}
           yFormat=" >-.2f"
+          curve="basis"
           axisTop={null}
-          axisRight={{
-            orient: "right",
+          axisRight={null}
+          axisBottom={{
+            orient: "bottom",
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 0,
-            legend: "",
-            legendOffset: 0,
+            tickRotation: -90,
+            legend: "TIME",
+            legendOffset: 36,
+            legendPosition: "middle",
           }}
-          axisBottom={null}
           axisLeft={{
             orient: "left",
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "PH",
+            legend: "EC",
             legendOffset: -40,
             legendPosition: "middle",
           }}
           enableGridX={false}
-          colors={{ scheme: "purple_orange" }}
           enablePoints={false}
+          colors={{ scheme: "purple_orange" }}
           pointSize={10}
           pointColor={{ theme: "background" }}
           pointBorderWidth={2}
           pointBorderColor={{ from: "serieColor" }}
           pointLabelYOffset={-12}
-          enableArea={true}
-          isInteractive={false}
-          legends={[]}
+          useMesh={true}
+          legends={[
+            {
+              anchor: "bottom-right",
+              direction: "column",
+              justify: false,
+              translateX: 100,
+              translateY: 0,
+              itemsSpacing: 0,
+              itemDirection: "left-to-right",
+              itemWidth: 80,
+              itemHeight: 20,
+              itemOpacity: 0.75,
+              symbolSize: 12,
+              symbolShape: "circle",
+              symbolBorderColor: "rgba(0, 0, 0, .5)",
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemBackground: "rgba(0, 0, 0, .03)",
+                    itemOpacity: 1,
+                  },
+                },
+              ],
+            },
+          ]}
         />
       </div>
 
