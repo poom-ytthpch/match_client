@@ -28,7 +28,7 @@ export default function Board() {
   // const server = "https://www.matchchemical.tk:57524";
   // const server = "http://localhost:4002";
   // const server = "http://localhost:4008/v1";
-  const server = "https://www.matchchemical.tk:57527/v1";
+  const server = "https://www.matchchemical.tk:4008/v1";
 
   const usServer = "https://userlogapi.herokuapp.com"; //userServer
   // const usServer = "https://www.matchchemical.tk:57521";
