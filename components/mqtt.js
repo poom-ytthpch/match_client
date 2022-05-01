@@ -1413,10 +1413,27 @@ const Mqtt = ({ board }) => {
                       <IOSSwitch
                         sx={{ m: 1 }}
                         checked={
-                          board.sensors[0] ? board.sensors[0].state : false
+                          board.sensors[
+                            board.sensors.findIndex((i) => {
+                              return i.index === 1;
+                            })
+                          ]
+                            ? board.sensors[
+                                board.sensors.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].state
+                            : false
                         }
                         onChange={(e) =>
-                          updateSensorState(1, !board.sensors[0].state)
+                          updateSensorState(
+                            1,
+                            !board.sensors[
+                              board.sensors.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].state
+                          )
                         }
                       />
                     }
@@ -1503,10 +1520,23 @@ const Mqtt = ({ board }) => {
                             board.sensors.findIndex((i) => {
                               return i.index === 2;
                             })
-                          ].state
+                          ]
+                            ? board.sensors[
+                                board.sensors.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].state
+                            : false
                         }
                         onChange={(e) =>
-                          updateSensorState(2, !board.sensors[1].state)
+                          updateSensorState(
+                            2,
+                            !board.sensors[
+                              board.sensors.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].state
+                          )
                         }
                       />
                     }
@@ -1679,7 +1709,13 @@ const Mqtt = ({ board }) => {
                       <input
                         className="form-control"
                         type="text"
-                        defaultValue={board.gpios[0].title}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 0;
+                            })
+                          ].title
+                        }
                         onChange={(e) => {
                           setName(e.target.value);
                         }}
@@ -1688,7 +1724,12 @@ const Mqtt = ({ board }) => {
                         className="btn btn-outline-success mt-2"
                         onClick={() =>
                           updateGpioName({
-                            index: board.gpios[0].index,
+                            index:
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].index,
                             name: name,
                           })
                         }
@@ -1711,7 +1752,13 @@ const Mqtt = ({ board }) => {
                         setRelay1Name(!relay1Name);
                       }}
                     >
-                      {board.gpios[0].title}
+                      {
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].title
+                      }
                     </p>
                   )}
 
@@ -1755,17 +1802,40 @@ const Mqtt = ({ board }) => {
                     <></>
                   )}
 
-                  {(Boolean(board.gpios[0]) ? board.gpios[0].state : false) ===
-                  false ? (
+                  {(Boolean(
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 0;
+                      })
+                    ]
+                  )
+                    ? board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 0;
+                        })
+                      ].state
+                    : false) === false ? (
                     <button
                       type="button"
                       className="btn btn-outline-danger"
                       onClick={() => updateGpioState(0, 1)}
                       disabled={
                         Disable ||
-                        board.gpios[0].gpio_datum.phState ||
-                        board.gpios[0].gpio_datum.ecState ||
-                        board.gpios[0].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.ecState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.timerState
                       }
                     >
                       OFF
@@ -1777,9 +1847,21 @@ const Mqtt = ({ board }) => {
                       onClick={() => updateGpioState(0, 0)}
                       disabled={
                         Disable ||
-                        board.gpios[0].gpio_datum.phState ||
-                        board.gpios[0].gpio_datum.ecState ||
-                        board.gpios[0].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.ecState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.timerState
                       }
                     >
                       ON
@@ -1792,12 +1874,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[0].gpio_datum.phState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 0;
+                              })
+                            ].gpio_datum.phState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "PH_STATE",
-                              board.gpios[0].id,
-                              !board.gpios[0].gpio_datum.phState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].gpio_datum.phState,
                               e.preventDefault()
                             )
                           }
@@ -1805,8 +1901,16 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[0].gpio_datum.timerState ||
-                        board.gpios[0].gpio_datum.ecState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.timerState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.ecState
                       }
                       label="PH"
                     />
@@ -1815,12 +1919,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[0].gpio_datum.ecState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 0;
+                              })
+                            ].gpio_datum.ecState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "EC_STATE",
-                              board.gpios[0].id,
-                              !board.gpios[0].gpio_datum.ecState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].gpio_datum.ecState,
                               e.preventDefault()
                             )
                           }
@@ -1828,8 +1946,16 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[0].gpio_datum.phState ||
-                        board.gpios[0].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.timerState
                       }
                       label="EC"
                     />
@@ -1838,12 +1964,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[0].gpio_datum.timerState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 0;
+                              })
+                            ].gpio_datum.timerState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "TIMER_STATE",
-                              board.gpios[0].id,
-                              !board.gpios[0].gpio_datum.timerState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].gpio_datum.timerState,
                               e.preventDefault()
                             )
                           }
@@ -1851,22 +1991,40 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[0].gpio_datum.phState ||
-                        board.gpios[0].gpio_datum.ecState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.ecState
                       }
                       label="TIMER"
                     />
                   </div>
                 </div>
                 {/* ******************* Ph ******************* */}
-                {board.gpios[0].gpio_datum.phState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 0;
+                  })
+                ].gpio_datum.phState && (
                   <form className="mt-3 box-form">
                     <p>PH</p>
                     <div className="mb-3">
                       <label>START:</label>
                       <input
                         id="relay1PhStart"
-                        defaultValue={board.gpios[0].gpio_datum.maxPh}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 0;
+                            })
+                          ].gpio_datum.maxPh
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -1879,7 +2037,13 @@ const Mqtt = ({ board }) => {
                       <label>STOP:</label>
                       <input
                         id="relay1PhStop"
-                        defaultValue={board.gpios[0].gpio_datum.minPh}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 0;
+                            })
+                          ].gpio_datum.minPh
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -1895,7 +2059,11 @@ const Mqtt = ({ board }) => {
                         onClick={(e) =>
                           updateGpioData(
                             "MAX_MIN_PH_STATE",
-                            board.gpios[0].id,
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 0;
+                              })
+                            ].id,
                             {
                               maxPh: Number(
                                 document.getElementById("relay1PhStart").value
@@ -1916,14 +2084,24 @@ const Mqtt = ({ board }) => {
 
                 {/* ******************* EC ******************* */}
 
-                {board.gpios[0].gpio_datum.ecState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 0;
+                  })
+                ].gpio_datum.ecState && (
                   <form className="mt-3 box-form">
                     <p>EC</p>
                     <div className="mb-3">
                       <label>START:</label>
                       <input
                         id="relay1EcStart"
-                        defaultValue={board.gpios[0].gpio_datum.maxEc}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 0;
+                            })
+                          ].gpio_datum.maxEc
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -1936,7 +2114,13 @@ const Mqtt = ({ board }) => {
                       <label>STOP:</label>
                       <input
                         id="relay1EcStop"
-                        defaultValue={board.gpios[0].gpio_datum.minEc}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 0;
+                            })
+                          ].gpio_datum.minEc
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -1952,7 +2136,11 @@ const Mqtt = ({ board }) => {
                         onClick={(e) =>
                           updateGpioData(
                             "MAX_MIN_EC_STATE",
-                            board.gpios[0].id,
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 0;
+                              })
+                            ].id,
                             {
                               maxEc: Number(
                                 document.getElementById("relay1EcStart").value
@@ -1972,7 +2160,11 @@ const Mqtt = ({ board }) => {
                 )}
 
                 {/* ******************* Timer ******************* */}
-                {board.gpios[0].gpio_datum.timerState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 0;
+                  })
+                ].gpio_datum.timerState && (
                   <>
                     <form className="mt-3 box-form">
                       <p>Timer</p>
@@ -2108,7 +2300,11 @@ const Mqtt = ({ board }) => {
                           onClick={(e) =>
                             createTimer(
                               "GPIO1",
-                              board.gpios[0].id,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].id,
                               {
                                 start: String(
                                   document.getElementById("relay1StartTime")
@@ -2126,7 +2322,11 @@ const Mqtt = ({ board }) => {
                         >
                           SET
                         </button>
-                        {board.gpios[0].timers.length > 0 && (
+                        {board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].timers.length > 0 && (
                           <button
                             id="set"
                             className="mt-2"
@@ -2134,7 +2334,14 @@ const Mqtt = ({ board }) => {
                               handleOpenTimer(1, e.preventDefault());
                             }}
                           >
-                            SHOW TIMER :{board.gpios[0].timers.length}
+                            SHOW TIMER :
+                            {
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].timers.length
+                            }
                           </button>
                         )}
                       </div>
@@ -2162,7 +2369,11 @@ const Mqtt = ({ board }) => {
                               </tr>
                             </thead>
                             <tbody style={{ textAlign: "center" }}>
-                              {board.gpios[0].timers.map((timer, k) => {
+                              {board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].timers.map((timer, k) => {
                                 return (
                                   <tr key={timer.id}>
                                     <td>{k + 1}</td>
@@ -2233,7 +2444,13 @@ const Mqtt = ({ board }) => {
                       <input
                         className="form-control"
                         type="text"
-                        defaultValue={board.gpios[1].title}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 1;
+                            })
+                          ].title
+                        }
                         onChange={(e) => {
                           setName(e.target.value);
                         }}
@@ -2242,7 +2459,12 @@ const Mqtt = ({ board }) => {
                         className="btn btn-outline-success mt-2"
                         onClick={() =>
                           updateGpioName({
-                            index: board.gpios[1].index,
+                            index:
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].index,
                             name: name,
                           })
                         }
@@ -2265,7 +2487,13 @@ const Mqtt = ({ board }) => {
                         setRelay2Name(!relay2Name);
                       }}
                     >
-                      {board.gpios[1].title}
+                      {
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].title
+                      }
                     </p>
                   )}
 
@@ -2309,17 +2537,40 @@ const Mqtt = ({ board }) => {
                     <></>
                   )}
 
-                  {(Boolean(board.gpios[1]) ? board.gpios[1].state : false) ===
-                  false ? (
+                  {(Boolean(
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 1;
+                      })
+                    ]
+                  )
+                    ? board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 1;
+                        })
+                      ].state
+                    : false) === false ? (
                     <button
                       type="button"
                       className="btn btn-outline-danger"
                       onClick={() => updateGpioState(1, 1)}
                       disabled={
                         Disable ||
-                        board.gpios[1].gpio_datum.phState ||
-                        board.gpios[1].gpio_datum.ecState ||
-                        board.gpios[1].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.ecState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.timerState
                       }
                     >
                       OFF
@@ -2331,9 +2582,21 @@ const Mqtt = ({ board }) => {
                       onClick={() => updateGpioState(1, 0)}
                       disabled={
                         Disable ||
-                        board.gpios[1].gpio_datum.phState ||
-                        board.gpios[1].gpio_datum.ecState ||
-                        board.gpios[1].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.ecState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.timerState
                       }
                     >
                       ON
@@ -2346,12 +2609,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[1].gpio_datum.phState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].gpio_datum.phState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "PH_STATE",
-                              board.gpios[1].id,
-                              !board.gpios[1].gpio_datum.phState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].gpio_datum.phState,
                               e.preventDefault()
                             )
                           }
@@ -2359,8 +2636,16 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[1].gpio_datum.timerState ||
-                        board.gpios[1].gpio_datum.ecState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.timerState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.ecState
                       }
                       label="PH"
                     />
@@ -2369,12 +2654,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[1].gpio_datum.ecState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].gpio_datum.ecState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "EC_STATE",
-                              board.gpios[1].id,
-                              !board.gpios[1].gpio_datum.ecState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].gpio_datum.ecState,
                               e.preventDefault()
                             )
                           }
@@ -2382,8 +2681,16 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[1].gpio_datum.phState ||
-                        board.gpios[1].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.timerState
                       }
                       label="EC"
                     />
@@ -2392,12 +2699,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[1].gpio_datum.timerState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].gpio_datum.timerState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "TIMER_STATE",
-                              board.gpios[1].id,
-                              !board.gpios[1].gpio_datum.timerState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].gpio_datum.timerState,
                               e.preventDefault()
                             )
                           }
@@ -2405,22 +2726,40 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[1].gpio_datum.phState ||
-                        board.gpios[1].gpio_datum.ecState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.ecState
                       }
                       label="TIMER"
                     />
                   </div>
                 </div>
                 {/* ******************* Ph ******************* */}
-                {board.gpios[1].gpio_datum.phState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 1;
+                  })
+                ].gpio_datum.phState && (
                   <form className="mt-3 box-form">
                     <p>PH</p>
                     <div className="mb-3">
                       <label>START:</label>
                       <input
                         id="relay2PhStart"
-                        defaultValue={board.gpios[1].gpio_datum.maxPh}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 1;
+                            })
+                          ].gpio_datum.maxPh
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -2433,7 +2772,13 @@ const Mqtt = ({ board }) => {
                       <label>STOP:</label>
                       <input
                         id="relay2PhStop"
-                        defaultValue={board.gpios[1].gpio_datum.minPh}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 1;
+                            })
+                          ].gpio_datum.minPh
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -2449,7 +2794,11 @@ const Mqtt = ({ board }) => {
                         onClick={(e) =>
                           updateGpioData(
                             "MAX_MIN_PH_STATE",
-                            board.gpios[1].id,
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].id,
                             {
                               maxPh: Number(
                                 document.getElementById("relay2PhStart").value
@@ -2470,14 +2819,24 @@ const Mqtt = ({ board }) => {
 
                 {/* ******************* EC ******************* */}
 
-                {board.gpios[1].gpio_datum.ecState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 1;
+                  })
+                ].gpio_datum.ecState && (
                   <form className="mt-3 box-form">
                     <p>EC</p>
                     <div className="mb-3">
                       <label>START:</label>
                       <input
                         id="relay2EcStart"
-                        defaultValue={board.gpios[1].gpio_datum.maxEc}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 1;
+                            })
+                          ].gpio_datum.maxEc
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -2490,7 +2849,13 @@ const Mqtt = ({ board }) => {
                       <label>STOP:</label>
                       <input
                         id="relay2EcStop"
-                        defaultValue={board.gpios[1].gpio_datum.minEc}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 1;
+                            })
+                          ].gpio_datum.minEc
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -2506,7 +2871,11 @@ const Mqtt = ({ board }) => {
                         onClick={(e) =>
                           updateGpioData(
                             "MAX_MIN_EC_STATE",
-                            board.gpios[1].id,
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].id,
                             {
                               maxEc: Number(
                                 document.getElementById("relay2EcStart").value
@@ -2526,7 +2895,11 @@ const Mqtt = ({ board }) => {
                 )}
 
                 {/* ******************* Timer ******************* */}
-                {board.gpios[1].gpio_datum.timerState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 1;
+                  })
+                ].gpio_datum.timerState && (
                   <>
                     <form className="mt-3 box-form">
                       <p>Timer</p>
@@ -2662,7 +3035,11 @@ const Mqtt = ({ board }) => {
                           onClick={(e) =>
                             createTimer(
                               "GPIO2",
-                              board.gpios[1].id,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].id,
                               {
                                 start: String(
                                   document.getElementById("relay2StartTime")
@@ -2680,7 +3057,11 @@ const Mqtt = ({ board }) => {
                         >
                           SET
                         </button>
-                        {board.gpios[1].timers.length > 0 && (
+                        {board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].timers.length > 0 && (
                           <button
                             id="set"
                             className="mt-2"
@@ -2688,7 +3069,14 @@ const Mqtt = ({ board }) => {
                               handleOpenTimer(2, e.preventDefault());
                             }}
                           >
-                            SHOW TIMER :{board.gpios[1].timers.length}
+                            SHOW TIMER :
+                            {
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].timers.length
+                            }
                           </button>
                         )}
                       </div>
@@ -2716,7 +3104,11 @@ const Mqtt = ({ board }) => {
                               </tr>
                             </thead>
                             <tbody style={{ textAlign: "center" }}>
-                              {board.gpios[1].timers.map((timer, k) => {
+                              {board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].timers.map((timer, k) => {
                                 return (
                                   <tr key={timer.id}>
                                     <td>{k + 1}</td>
@@ -2787,7 +3179,13 @@ const Mqtt = ({ board }) => {
                       <input
                         className="form-control"
                         type="text"
-                        defaultValue={board.gpios[2].title}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 2;
+                            })
+                          ].title
+                        }
                         onChange={(e) => {
                           setName(e.target.value);
                         }}
@@ -2796,7 +3194,12 @@ const Mqtt = ({ board }) => {
                         className="btn btn-outline-success mt-2"
                         onClick={() =>
                           updateGpioName({
-                            index: board.gpios[2].index,
+                            index:
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].index,
                             name: name,
                           })
                         }
@@ -2819,7 +3222,13 @@ const Mqtt = ({ board }) => {
                         setRelay3Name(!relay3Name);
                       }}
                     >
-                      {board.gpios[2].title}
+                      {
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].title
+                      }
                     </p>
                   )}
 
@@ -2863,17 +3272,40 @@ const Mqtt = ({ board }) => {
                     <></>
                   )}
 
-                  {(Boolean(board.gpios[2]) ? board.gpios[2].state : false) ===
-                  false ? (
+                  {(Boolean(
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 2;
+                      })
+                    ]
+                  )
+                    ? board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 2;
+                        })
+                      ].state
+                    : false) === false ? (
                     <button
                       type="button"
                       className="btn btn-outline-danger"
                       onClick={() => updateGpioState(2, 1)}
                       disabled={
                         Disable ||
-                        board.gpios[2].gpio_datum.phState ||
-                        board.gpios[2].gpio_datum.ecState ||
-                        board.gpios[2].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.ecState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.timerState
                       }
                     >
                       OFF
@@ -2885,9 +3317,21 @@ const Mqtt = ({ board }) => {
                       onClick={() => updateGpioState(2, 0)}
                       disabled={
                         Disable ||
-                        board.gpios[2].gpio_datum.phState ||
-                        board.gpios[2].gpio_datum.ecState ||
-                        board.gpios[2].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.ecState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.timerState
                       }
                     >
                       ON
@@ -2900,12 +3344,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[2].gpio_datum.phState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].gpio_datum.phState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "PH_STATE",
-                              board.gpios[2].id,
-                              !board.gpios[2].gpio_datum.phState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].gpio_datum.phState,
                               e.preventDefault()
                             )
                           }
@@ -2913,8 +3371,16 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[2].gpio_datum.timerState ||
-                        board.gpios[2].gpio_datum.ecState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.timerState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.ecState
                       }
                       label="PH"
                     />
@@ -2923,12 +3389,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[2].gpio_datum.ecState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].gpio_datum.ecState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "EC_STATE",
-                              board.gpios[2].id,
-                              !board.gpios[2].gpio_datum.ecState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].gpio_datum.ecState,
                               e.preventDefault()
                             )
                           }
@@ -2936,8 +3416,16 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[2].gpio_datum.phState ||
-                        board.gpios[2].gpio_datum.timerState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.timerState
                       }
                       label="EC"
                     />
@@ -2946,12 +3434,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[2].gpio_datum.timerState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].gpio_datum.timerState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "TIMER_STATE",
-                              board.gpios[2].id,
-                              !board.gpios[2].gpio_datum.timerState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].gpio_datum.timerState,
                               e.preventDefault()
                             )
                           }
@@ -2959,22 +3461,40 @@ const Mqtt = ({ board }) => {
                       }
                       disabled={
                         Disable ||
-                        board.gpios[2].gpio_datum.phState ||
-                        board.gpios[2].gpio_datum.ecState
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.phState ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.ecState
                       }
                       label="TIMER"
                     />
                   </div>
                 </div>
                 {/* ******************* Ph ******************* */}
-                {board.gpios[2].gpio_datum.phState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 2;
+                  })
+                ].gpio_datum.phState && (
                   <form className="mt-3 box-form">
                     <p>PH</p>
                     <div className="mb-3">
                       <label>START:</label>
                       <input
                         id="relay3PhStart"
-                        defaultValue={board.gpios[2].gpio_datum.maxPh}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 2;
+                            })
+                          ].gpio_datum.maxPh
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -2987,7 +3507,13 @@ const Mqtt = ({ board }) => {
                       <label>STOP:</label>
                       <input
                         id="relay3PhStop"
-                        defaultValue={board.gpios[2].gpio_datum.minPh}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 2;
+                            })
+                          ].gpio_datum.minPh
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -3003,7 +3529,11 @@ const Mqtt = ({ board }) => {
                         onClick={(e) =>
                           updateGpioData(
                             "MAX_MIN_PH_STATE",
-                            board.gpios[2].id,
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].id,
                             {
                               maxPh: Number(
                                 document.getElementById("relay3PhStart").value
@@ -3024,14 +3554,24 @@ const Mqtt = ({ board }) => {
 
                 {/* ******************* EC ******************* */}
 
-                {board.gpios[2].gpio_datum.ecState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 2;
+                  })
+                ].gpio_datum.ecState && (
                   <form className="mt-3 box-form">
                     <p>EC</p>
                     <div className="mb-3">
                       <label>START:</label>
                       <input
                         id="relay3EcStart"
-                        defaultValue={board.gpios[2].gpio_datum.maxEc}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 2;
+                            })
+                          ].gpio_datum.maxEc
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -3044,7 +3584,13 @@ const Mqtt = ({ board }) => {
                       <label>STOP:</label>
                       <input
                         id="relay3EcStop"
-                        defaultValue={board.gpios[2].gpio_datum.minEc}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 2;
+                            })
+                          ].gpio_datum.minEc
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -3060,7 +3606,11 @@ const Mqtt = ({ board }) => {
                         onClick={(e) =>
                           updateGpioData(
                             "MAX_MIN_EC_STATE",
-                            board.gpios[2].id,
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].id,
                             {
                               maxEc: Number(
                                 document.getElementById("relay3EcStart").value
@@ -3080,7 +3630,11 @@ const Mqtt = ({ board }) => {
                 )}
 
                 {/* ******************* Timer ******************* */}
-                {board.gpios[2].gpio_datum.timerState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 2;
+                  })
+                ].gpio_datum.timerState && (
                   <>
                     <form className="mt-3 box-form">
                       <p>Timer</p>
@@ -3216,7 +3770,11 @@ const Mqtt = ({ board }) => {
                           onClick={(e) =>
                             createTimer(
                               "GPIO3",
-                              board.gpios[2].id,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].id,
                               {
                                 start: String(
                                   document.getElementById("relay3StartTime")
@@ -3234,7 +3792,11 @@ const Mqtt = ({ board }) => {
                         >
                           SET
                         </button>
-                        {board.gpios[2].timers.length > 0 && (
+                        {board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].timers.length > 0 && (
                           <button
                             id="set"
                             className="mt-2"
@@ -3242,7 +3804,14 @@ const Mqtt = ({ board }) => {
                               handleOpenTimer(3, e.preventDefault());
                             }}
                           >
-                            SHOW TIMER :{board.gpios[2].timers.length}
+                            SHOW TIMER :
+                            {
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].timers.length
+                            }
                           </button>
                         )}
                       </div>
@@ -3270,7 +3839,11 @@ const Mqtt = ({ board }) => {
                               </tr>
                             </thead>
                             <tbody style={{ textAlign: "center" }}>
-                              {board.gpios[2].timers.map((timer, k) => {
+                              {board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].timers.map((timer, k) => {
                                 return (
                                   <tr key={timer.id}>
                                     <td>{k + 1}</td>
@@ -3389,8 +3962,19 @@ const Mqtt = ({ board }) => {
                     <></>
                   )}
 
-                  {(Boolean(board.gpios[3]) ? board.gpios[3].state : false) ===
-                  false ? (
+                  {(Boolean(
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 3;
+                      })
+                    ]
+                  )
+                    ? board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 3;
+                        })
+                      ].state
+                    : false) === false ? (
                     <button
                       type="button"
                       className="btn btn-outline-danger"
@@ -3416,12 +4000,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[3].gpio_datum.phState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 3;
+                              })
+                            ].gpio_datum.phState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "PH_STATE",
-                              board.gpios[3].id,
-                              !board.gpios[3].gpio_datum.phState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 3;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 3;
+                                })
+                              ].gpio_datum.phState,
                               e.preventDefault()
                             )
                           }
@@ -3435,12 +4033,26 @@ const Mqtt = ({ board }) => {
                       control={
                         <IOSSwitch
                           sx={{ m: 1 }}
-                          checked={board.gpios[3].gpio_datum.ecState}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 3;
+                              })
+                            ].gpio_datum.ecState
+                          }
                           onChange={(e) =>
                             updateGpioData(
                               "EC_STATE",
-                              board.gpios[3].id,
-                              !board.gpios[3].gpio_datum.ecState,
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 3;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 3;
+                                })
+                              ].gpio_datum.ecState,
                               e.preventDefault()
                             )
                           }
@@ -3472,14 +4084,24 @@ const Mqtt = ({ board }) => {
                   </div>
                 </div>
                 {/* ******************* Ph ******************* */}
-                {board.gpios[3].gpio_datum.phState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 3;
+                  })
+                ].gpio_datum.phState && (
                   <form className="mt-3 box-form">
                     <p>PH</p>
                     <div className="mb-3">
                       <label>START:</label>
                       <input
                         id="relayAlertPhStart"
-                        defaultValue={board.gpios[3].gpio_datum.maxPh}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 3;
+                            })
+                          ].gpio_datum.maxPh
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -3492,7 +4114,13 @@ const Mqtt = ({ board }) => {
                       <label>STOP:</label>
                       <input
                         id="relayAlertPhStop"
-                        defaultValue={board.gpios[3].gpio_datum.minPh}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 3;
+                            })
+                          ].gpio_datum.minPh
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -3508,7 +4136,11 @@ const Mqtt = ({ board }) => {
                         onClick={(e) =>
                           updateGpioData(
                             "MAX_MIN_PH_STATE",
-                            board.gpios[3].id,
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 3;
+                              })
+                            ].id,
                             {
                               maxPh: Number(
                                 document.getElementById("relayAlertPhStart")
@@ -3531,14 +4163,24 @@ const Mqtt = ({ board }) => {
 
                 {/* ******************* EC ******************* */}
 
-                {board.gpios[3].gpio_datum.ecState && (
+                {board.gpios[
+                  board.gpios.findIndex((i) => {
+                    return i.index === 3;
+                  })
+                ].gpio_datum.ecState && (
                   <form className="mt-3 box-form">
                     <p>EC</p>
                     <div className="mb-3">
                       <label>START:</label>
                       <input
                         id="relayAlertEcStart"
-                        defaultValue={board.gpios[3].gpio_datum.maxEc}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 3;
+                            })
+                          ].gpio_datum.maxEc
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -3551,7 +4193,13 @@ const Mqtt = ({ board }) => {
                       <label>STOP:</label>
                       <input
                         id="relayAlertEcStop"
-                        defaultValue={board.gpios[3].gpio_datum.minEc}
+                        defaultValue={
+                          board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 3;
+                            })
+                          ].gpio_datum.minEc
+                        }
                         className="form-input"
                         type="number"
                         min="0"
@@ -3567,7 +4215,11 @@ const Mqtt = ({ board }) => {
                         onClick={(e) =>
                           updateGpioData(
                             "MAX_MIN_EC_STATE",
-                            board.gpios[3].id,
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 3;
+                              })
+                            ].id,
                             {
                               maxEc: Number(
                                 document.getElementById("relayAlertEcStart")
