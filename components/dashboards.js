@@ -759,12 +759,18 @@ const THLine = ({ boardData, boardId }) => {
     const tmpTime = i.time;
     const Time = tmpTime.split(" ");
     dataTmp.push({ x: Time[4], y: Number(i.temperature) });
+    data2Tmp.push({ x: Time[4], y: Number(i.humidity) });
   });
   const data = [
     {
-      id: b_name,
+      id: "TEMP",
       color: "hsl(353, 70%, 50%)",
       data: dataTmp,
+    },
+    {
+      id: "HUM",
+      color: "hsl(353, 70%, 50%)",
+      data: data2Tmp,
     },
   ];
   return (
@@ -785,7 +791,7 @@ const THLine = ({ boardData, boardId }) => {
           yScale={{
             type: "linear",
             min: 0,
-            max: max + 20,
+            max: max + 50,
             stacked: false,
             reverse: false,
           }}
