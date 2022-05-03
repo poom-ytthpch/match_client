@@ -240,7 +240,47 @@ const Dashboards = ({
                       // }}
                     >
                       <div className="chart">
-                        <MyResponsiveLine
+                        <THLine
+                          boardData={boardData}
+                          boardId={boardId}
+                          // getBoardData={getBoardData()}
+                        />
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <h1 className="center">
+                    <img src="./loading.gif" />
+                  </h1>
+                )
+              ) : (
+                <h2>PLEASE SELECT BOARD</h2>
+              )}
+            </div>
+            <div className="box-ec-chart">
+              {boardId !== "" ? (
+                boardData.message ? (
+                  <h1>{boardData.message}</h1>
+                ) : boardData.length !== 0 ? (
+                  <>
+                    {" "}
+                    <div
+                      className="dashboard-ec-chart"
+                      // style={{
+                      //   height: 500,
+                      //   boxShadow: "0px 0px 8px 4px rgba(0, 0, 0, 0.1)",
+                      //   border: "1px solid white",
+                      //   borderRadius: "10px",
+                      //   width: "100%",
+                      //   display: "flex",
+                      //   overflow: "auto",
+                      //   justifyContent: "center",
+
+                      //   // width: "70%",
+                      // }}
+                    >
+                      <div className="chart">
+                        <EcLine
                           boardData={boardData}
                           boardId={boardId}
                           // getBoardData={getBoardData()}
@@ -365,7 +405,7 @@ const Dashboards = ({
   );
 };
 
-const MyResponsiveLine = ({ boardData, boardId }) => {
+const EcLine = ({ boardData, boardId }) => {
   const tmpData = boardData;
   const Months = [
     "Jan",
@@ -609,6 +649,165 @@ const PhLine = ({ boardData, boardId }) => {
             tickPadding: 5,
             tickRotation: 0,
             legend: "EC",
+            legendOffset: -40,
+            legendPosition: "middle",
+          }}
+          enableGridX={false}
+          enablePoints={false}
+          colors={{ scheme: "purple_orange" }}
+          pointSize={10}
+          pointColor={{ theme: "background" }}
+          pointBorderWidth={2}
+          pointBorderColor={{ from: "serieColor" }}
+          pointLabelYOffset={-12}
+          useMesh={true}
+          legends={[
+            {
+              anchor: "bottom-right",
+              direction: "column",
+              justify: false,
+              translateX: 100,
+              translateY: 0,
+              itemsSpacing: 0,
+              itemDirection: "left-to-right",
+              itemWidth: 80,
+              itemHeight: 20,
+              itemOpacity: 0.75,
+              symbolSize: 12,
+              symbolShape: "circle",
+              symbolBorderColor: "rgba(0, 0, 0, .5)",
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemBackground: "rgba(0, 0, 0, .03)",
+                    itemOpacity: 1,
+                  },
+                },
+              ],
+            },
+          ]}
+        />
+      </div>
+
+      <div className="time">
+        <p>{starTime}</p>
+        <p>{stopTime}</p>
+      </div>
+    </>
+  );
+};
+
+const THLine = ({ boardData, boardId }) => {
+  const Months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const TmpLastTime = boardData[0].time;
+  const lastTime = TmpLastTime.split(" ");
+  let tmpMonth = 0;
+  for (let i = 0; i < Months.length; i++) {
+    if (lastTime[1] == Months[i]) {
+      tmpMonth = i + 1;
+    }
+  }
+  const tmpData = boardData;
+  let b_name = "";
+  const tmpStartTime = boardData[0].time;
+  const tmpStopTime = boardData[boardData.length - 1].time;
+  const splitStartTime = tmpStartTime.split(" ");
+  const splitStopTime = tmpStopTime.split(" ");
+  const starTime = splitStartTime[4];
+  const stopTime = splitStopTime[4];
+  let dataTmp = [];
+  let data2Tmp = [];
+  let max = 0;
+  let min = 0;
+  let sumPh = 0;
+  let avgPh = 0;
+  for (let i = 0; i < boardData.length; i++) {
+    sumPh += Number(boardData[i].temperature);
+  }
+
+  avgPh = sumPh / boardData.length;
+  tmpData.map((i) => {
+    if (b_name === "" && i.deviceId === boardId) {
+      b_name = i.deviceId;
+    }
+    if (max === 0) {
+      max = Number(i.temperature);
+    }
+    if (min === 0) {
+      min = Number(i.temperature);
+    }
+    if (i.temperature > max) {
+      max = Number(i.temperature);
+    }
+    if (i.temperature < min) {
+      min = Number(i.temperature);
+    }
+    const tmpTime = i.time;
+    const Time = tmpTime.split(" ");
+    dataTmp.push({ x: Time[4], y: Number(i.temperature) });
+  });
+  const data = [
+    {
+      id: b_name,
+      color: "hsl(353, 70%, 50%)",
+      data: dataTmp,
+    },
+  ];
+  return (
+    <>
+      <div>
+        <h3>
+          AVG TEMPERATURE: {avgPh.toFixed(1)} MAX: {max} MIN: {min}
+        </h3>
+        <h5>
+          LAST UPDATE {lastTime[2]}/{tmpMonth}/{lastTime[3]}
+        </h5>
+      </div>
+      <div className="lineChart">
+        <ResponsiveLine
+          data={data}
+          margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+          xScale={{ type: "point" }}
+          yScale={{
+            type: "linear",
+            min: 0,
+            max: max + 20,
+            stacked: false,
+            reverse: false,
+          }}
+          yFormat=" >-.2f"
+          curve="basis"
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+            orient: "bottom",
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: -90,
+            legend: "TIME",
+            legendOffset: 36,
+            legendPosition: "middle",
+          }}
+          axisLeft={{
+            orient: "left",
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "TEMPERATURE",
             legendOffset: -40,
             legendPosition: "middle",
           }}
