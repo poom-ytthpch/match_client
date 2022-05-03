@@ -125,7 +125,6 @@ const Dashboard = () => {
             }
           )
           .then((res) => {
-            console.log(res);
             wait.close();
             if (res.data.model.length > 0) {
               setData(res.data.model);

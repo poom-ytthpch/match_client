@@ -407,7 +407,6 @@ const MyResponsiveLine = ({ boardData, boardId }) => {
 
   avgEc = sumEc / boardData.length;
   tmpData.map((i) => {
-    console.log(i.ec);
     if (b_name === "" && i.deviceId === boardId) {
       b_name = i.deviceId;
     }
@@ -425,7 +424,6 @@ const MyResponsiveLine = ({ boardData, boardId }) => {
       data: dataTmp,
     },
   ];
-  console.log(data);
   return (
     <>
       <div>

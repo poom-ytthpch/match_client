@@ -98,7 +98,6 @@ const Login = () => {
             password: password,
           })
           .then((res) => {
-            console.log(res.data);
             if (res.data.status) {
               cookie.set("_t_", res.data.user.token);
               cookie.set("_n_", res.data.user.name);

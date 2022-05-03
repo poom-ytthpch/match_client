@@ -67,7 +67,6 @@ const Sidebar = ({ children }) => {
       });
       Router.push("/login");
     }
-    console.log("SIDE BAR");
   };
 
   const verifyToken = async () => {

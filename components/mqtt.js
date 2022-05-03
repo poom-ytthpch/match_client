@@ -42,7 +42,6 @@ import { color } from "@mui/system";
 const server = "https://www.matchchemical.tk:4008/v1";
 
 const Mqtt = ({ board }) => {
-  console.log(board);
   if (board.ph !== null || board.ec !== null) {
     const [boardNameStatus, setBoardNameStatus] = useState(false);
     const [boardName, setBoardName] = useState("");
@@ -205,8 +204,15 @@ const Mqtt = ({ board }) => {
                     },
                   }
                 )
-                .then(() => {
+                .then((result) => {
                   alert.close();
+                  if (!result.data.status) {
+                    Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: result.data.message,
+                    });
+                  }
                 });
             } else {
               alert.close();
@@ -236,8 +242,15 @@ const Mqtt = ({ board }) => {
                     },
                   }
                 )
-                .then(() => {
+                .then((result) => {
                   alert.close();
+                  if (!result.data.status) {
+                    Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: result.data.message,
+                    });
+                  }
                 });
             } else {
               alert.close();
@@ -267,8 +280,15 @@ const Mqtt = ({ board }) => {
                     },
                   }
                 )
-                .then(() => {
+                .then((result) => {
                   alert.close();
+                  if (!result.data.status) {
+                    Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: result.data.message,
+                    });
+                  }
                 });
             } else {
               alert.close();
