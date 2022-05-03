@@ -522,103 +522,6 @@ const Mqtt = ({ board }) => {
       }
     };
 
-    // console.log(start, stop);
-    const handleSetName = async (device_id, relay, D_name) => {
-      if (name !== "") {
-        if (name.length <= 10) {
-          const alert = Swal.fire({
-            title: "PLEASE WAIT!",
-            timerProgressBar: true,
-            allowOutsideClick: false,
-            didOpen: () => {
-              Swal.showLoading();
-            },
-          });
-          await axios.post(`${server}/dataUpdate`, {
-            device_id: device_id,
-            dataUpdate: true,
-          });
-          await axios
-            .post(`${server}/relayControl`, {
-              device_id: device_id,
-              type: "SET_NAME",
-              name: name,
-              relay: relay,
-            })
-            .then(() => {
-              alert.close();
-              setName("");
-              setRelay1Name(false);
-              setRelay2Name(false);
-              setRelay3Name(false);
-            });
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "TOO LONGER NAME",
-          });
-        }
-      } else {
-        const alert = Swal.fire({
-          title: "PLEASE WAIT!",
-          timerProgressBar: true,
-          allowOutsideClick: false,
-          didOpen: () => {
-            Swal.showLoading();
-          },
-        });
-        await axios.post(`${server}/dataUpdate`, {
-          device_id: device_id,
-          dataUpdate: true,
-        });
-        await axios
-          .post(`${server}/relayControl`, {
-            device_id: device_id,
-            type: "SET_NAME",
-            name: D_name,
-            relay: relay,
-          })
-          .then(() => {
-            setName("");
-            setRelay1Name(false);
-            setRelay2Name(false);
-            setRelay3Name(false);
-            alert.close();
-          });
-      }
-    };
-
-    const relayControl = async (device_id, relay, status) => {
-      const alert = Swal.fire({
-        title: "PLEASE WAIT!",
-        timerProgressBar: true,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
-      try {
-        await axios.post(`${server}/dataUpdate`, {
-          device_id: device_id,
-          dataUpdate: true,
-        });
-        await axios
-          .post(`${server}/relayControl`, {
-            device_id: device_id,
-            relay: relay,
-            status: status,
-            type: "RELAY_STATUS",
-          })
-          .then(() => {
-            alert.close();
-          });
-      } catch (err) {
-        console.log(err);
-        alert.close();
-      }
-    };
-
     const AllDays = [
       "Everyday",
       "Sunday",
@@ -1040,68 +943,6 @@ const Mqtt = ({ board }) => {
 
           break;
       }
-    };
-
-    const updateBoardName = async (device_id, b_name) => {
-      const alert = Swal.fire({
-        title: "PLEASE WAIT!",
-        timerProgressBar: true,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
-
-      if (b_name === "") {
-        alert.close();
-
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "PLEASE INPUT NAME",
-        });
-
-        setBoardNameStatus(false);
-      } else {
-        await axios.post(`${server}/dataUpdate`, {
-          device_id: device_id,
-          dataUpdate: true,
-        });
-        await axios
-          .post(`${server}/boardName`, {
-            device_id: device_id,
-            b_name: b_name,
-          })
-          .then(() => {
-            alert.close();
-            // window.location.reload(false);
-          });
-      }
-    };
-
-    const autoStatus = async (device_id, auto) => {
-      const alert = Swal.fire({
-        title: "PLEASE WAIT!",
-        timerProgressBar: true,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
-
-      await axios.post(`${server}/dataUpdate`, {
-        device_id: device_id,
-        dataUpdate: true,
-      });
-
-      await axios
-        .post(`${server}/auto`, {
-          device_id: device_id,
-          auto: !auto,
-        })
-        .then(() => {
-          alert.close();
-        });
     };
 
     function getStyles(name, day, theme) {
@@ -1782,16 +1623,39 @@ const Mqtt = ({ board }) => {
                     </p>
                   )}
 
-                  {board.relay1PhStatus ? (
-                    board.relay1PhStart > board.relay1PhStop ? (
-                      board.ph >= board.relay1PhStart ? (
+                  {board.gpios[
+                    board.gpios.findIndex((i) => {
+                      return i.index === 0;
+                    })
+                  ].gpio_datum.phState ? (
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 0;
+                      })
+                    ].gpio_datum.maxPh >
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 0;
+                      })
+                    ].gpio_datum.minPh ? (
+                      board.datum.ph >=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 0;
+                        })
+                      ].gpio_datum.maxPh ? (
                         <div className="alert">
                           <span>PH ALERT</span>
                         </div>
                       ) : (
                         <></>
                       )
-                    ) : board.ph <= board.relay1PhStart ? (
+                    ) : board.datum.ph <=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 0;
+                        })
+                      ].gpio_datum.maxPh ? (
                       <div className="alert">
                         <span>PH ALERT</span>
                       </div>
@@ -1802,16 +1666,39 @@ const Mqtt = ({ board }) => {
                     <></>
                   )}
 
-                  {board.relay1EcStatus ? (
-                    board.relay1EcStart > board.relay1EcStop ? (
-                      board.ec >= board.relay1EcStart ? (
+                  {board.gpios[
+                    board.gpios.findIndex((i) => {
+                      return i.index === 0;
+                    })
+                  ].gpio_datum.ecState ? (
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 0;
+                      })
+                    ].gpio_datum.maxEc >
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 0;
+                      })
+                    ].gpio_datum.minEc ? (
+                      board.datum.ec >=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 0;
+                        })
+                      ].gpio_datum.maxEc ? (
                         <div className="alert">
                           <span>EC ALERT</span>
                         </div>
                       ) : (
                         <></>
                       )
-                    ) : board.ec <= board.relay1EcStart ? (
+                    ) : board.datum.ec <=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 0;
+                        })
+                      ].gpio_datum.maxEc ? (
                       <div className="alert">
                         <span>EC ALERT</span>
                       </div>
@@ -2517,16 +2404,39 @@ const Mqtt = ({ board }) => {
                     </p>
                   )}
 
-                  {board.relay2PhStatus ? (
-                    board.relay2PhStart > board.relay2PhStop ? (
-                      board.ph >= board.relay2PhStart ? (
+                  {board.gpios[
+                    board.gpios.findIndex((i) => {
+                      return i.index === 1;
+                    })
+                  ].gpio_datum.phState ? (
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 1;
+                      })
+                    ].gpio_datum.maxPh >
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 1;
+                      })
+                    ].gpio_datum.minPh ? (
+                      board.datum.ph >=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 1;
+                        })
+                      ].gpio_datum.maxPh ? (
                         <div className="alert">
                           <span>PH ALERT</span>
                         </div>
                       ) : (
                         <></>
                       )
-                    ) : board.ph <= board.relay2PhStart ? (
+                    ) : board.datum.ph <=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 1;
+                        })
+                      ].gpio_datum.maxPh ? (
                       <div className="alert">
                         <span>PH ALERT</span>
                       </div>
@@ -2537,16 +2447,39 @@ const Mqtt = ({ board }) => {
                     <></>
                   )}
 
-                  {board.relay2EcStatus ? (
-                    board.relay2EcStart > board.relay2EcStop ? (
-                      board.ec >= board.relay2EcStart ? (
+                  {board.gpios[
+                    board.gpios.findIndex((i) => {
+                      return i.index === 1;
+                    })
+                  ].gpio_datum.ecState ? (
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 1;
+                      })
+                    ].gpio_datum.maxEc >
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 1;
+                      })
+                    ].gpio_datum.minEc ? (
+                      board.datum.ec >=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 1;
+                        })
+                      ].gpio_datum.maxEc ? (
                         <div className="alert">
                           <span>EC ALERT</span>
                         </div>
                       ) : (
                         <></>
                       )
-                    ) : board.ec <= board.relay2EcStart ? (
+                    ) : board.datum.ec <=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 1;
+                        })
+                      ].gpio_datum.maxEc ? (
                       <div className="alert">
                         <span>EC ALERT</span>
                       </div>
@@ -3252,16 +3185,39 @@ const Mqtt = ({ board }) => {
                     </p>
                   )}
 
-                  {board.relay3PhStatus ? (
-                    board.relay3PhStart > board.relay3PhStop ? (
-                      board.ph >= board.relay3PhStart ? (
+                  {board.gpios[
+                    board.gpios.findIndex((i) => {
+                      return i.index === 2;
+                    })
+                  ].gpio_datum.phState ? (
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 2;
+                      })
+                    ].gpio_datum.maxPh >
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 2;
+                      })
+                    ].gpio_datum.minPh ? (
+                      board.datum.ph >=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 2;
+                        })
+                      ].gpio_datum.maxPh ? (
                         <div className="alert">
                           <span>PH ALERT</span>
                         </div>
                       ) : (
                         <></>
                       )
-                    ) : board.ph <= board.relay3PhStart ? (
+                    ) : board.datum.ph <=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 2;
+                        })
+                      ].gpio_datum.maxPh ? (
                       <div className="alert">
                         <span>PH ALERT</span>
                       </div>
@@ -3272,16 +3228,39 @@ const Mqtt = ({ board }) => {
                     <></>
                   )}
 
-                  {board.relay3EcStatus ? (
-                    board.relay3EcStart > board.relay3EcStop ? (
-                      board.ec >= board.relay3EcStart ? (
+                  {board.gpios[
+                    board.gpios.findIndex((i) => {
+                      return i.index === 2;
+                    })
+                  ].gpio_datum.ecState ? (
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 2;
+                      })
+                    ].gpio_datum.maxEc >
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 2;
+                      })
+                    ].gpio_datum.minEc ? (
+                      board.datum.ec >=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 2;
+                        })
+                      ].gpio_datum.maxEc ? (
                         <div className="alert">
                           <span>EC ALERT</span>
                         </div>
                       ) : (
                         <></>
                       )
-                    ) : board.ec <= board.relay3EcStart ? (
+                    ) : board.datum.ec <=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 2;
+                        })
+                      ].gpio_datum.maxEc ? (
                       <div className="alert">
                         <span>EC ALERT</span>
                       </div>
@@ -3942,16 +3921,39 @@ const Mqtt = ({ board }) => {
                     ALERT
                   </p>
 
-                  {board.relayAlertPhStatus ? (
-                    board.relayAlertPhStart > board.relayAlertPhStop ? (
-                      board.ph >= board.relayAlertPhStart ? (
+                  {board.gpios[
+                    board.gpios.findIndex((i) => {
+                      return i.index === 3;
+                    })
+                  ].gpio_datum.phState ? (
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 3;
+                      })
+                    ].gpio_datum.maxPh >
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 3;
+                      })
+                    ].gpio_datum.minPh ? (
+                      board.datum.ph >=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 3;
+                        })
+                      ].gpio_datum.maxPh ? (
                         <div className="alert">
                           <span>PH ALERT</span>
                         </div>
                       ) : (
                         <></>
                       )
-                    ) : board.ph <= board.relayAlertPhStart ? (
+                    ) : board.datum.ph <=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 3;
+                        })
+                      ].gpio_datum.maxPh ? (
                       <div className="alert">
                         <span>PH ALERT</span>
                       </div>
@@ -3962,16 +3964,39 @@ const Mqtt = ({ board }) => {
                     <></>
                   )}
 
-                  {board.relayAlertEcStatus ? (
-                    board.relayAlertEcStart > board.relayAlertEcStop ? (
-                      board.ec >= board.relayAlertEcStart ? (
+                  {board.gpios[
+                    board.gpios.findIndex((i) => {
+                      return i.index === 3;
+                    })
+                  ].gpio_datum.ecState ? (
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 3;
+                      })
+                    ].gpio_datum.maxEc >
+                    board.gpios[
+                      board.gpios.findIndex((i) => {
+                        return i.index === 3;
+                      })
+                    ].gpio_datum.minEc ? (
+                      board.datum.ec >=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 3;
+                        })
+                      ].gpio_datum.maxEc ? (
                         <div className="alert">
                           <span>EC ALERT</span>
                         </div>
                       ) : (
                         <></>
                       )
-                    ) : board.ec <= board.relayAlertEcStart ? (
+                    ) : board.datum.ec <=
+                      board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 3;
+                        })
+                      ].gpio_datum.maxEc ? (
                       <div className="alert">
                         <span>EC ALERT</span>
                       </div>
