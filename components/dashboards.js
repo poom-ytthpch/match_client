@@ -492,7 +492,7 @@ const EcLine = ({ boardData, boardId }) => {
           yScale={{
             type: "linear",
             min: 0,
-            max: max + 200,
+            max: max + 400,
             stacked: false,
             reverse: false,
           }}
