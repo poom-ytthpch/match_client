@@ -439,6 +439,7 @@ const EcLine = ({ boardData, boardId }) => {
 
   let dataTmp = [];
   let max = 0;
+  let min = 0;
   let sumEc = 0;
   let avgEc = 0;
   for (let i = 0; i < boardData.length; i++) {
@@ -451,7 +452,16 @@ const EcLine = ({ boardData, boardId }) => {
       b_name = i.deviceId;
     }
     if (max === 0) {
-      max = Number(i.ec) + 300;
+      max = Number(i.ec);
+    }
+    if (min === 0) {
+      min = Number(i.ec);
+    }
+    if (i.ec > max) {
+      max = Number(i.ec);
+    }
+    if (i.ec < min) {
+      min = Number(i.ec);
     }
     const tmpTime = i.time;
     const Time = tmpTime.split(" ");
@@ -467,7 +477,9 @@ const EcLine = ({ boardData, boardId }) => {
   return (
     <>
       <div>
-        <h3>AVG EC: {Math.floor(avgEc)}</h3>
+        <h3>
+          AVG EC: {Math.floor(avgEc)} MAX: {max} MIN: {min}
+        </h3>
         <h5>
           LAST UPDATE {lastTime[2]}/{tmpMonth}/{lastTime[3]}
         </h5>
@@ -480,7 +492,7 @@ const EcLine = ({ boardData, boardId }) => {
           yScale={{
             type: "linear",
             min: 0,
-            max: max,
+            max: max + 200,
             stacked: false,
             reverse: false,
           }}
