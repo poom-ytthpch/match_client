@@ -37,18 +37,19 @@ const Dashboards = ({
     { label: "No.", key: "no" },
     { label: "BOARD ID", key: "device_id" },
     { label: "BOARD NAME", key: "name" },
-    { label: "BOARD TEMP", key: "boardTemp" },
-    { label: "BOARD HUM", key: "boardHum" },
+    { label: "BOARD TEMP", key: "temperature" },
+    { label: "BOARD HUM", key: "humidity" },
     { label: "PH", key: "ph" },
     { label: "PH TEMP", key: "phTemp" },
     { label: "EC", key: "ec" },
     { label: "EC TEMP", key: "ecTemp" },
-    { label: "WATER FLOW", key: "flow" },
-    { label: "WATER TOTAL", key: "total" },
+    { label: "WATER FLOW", key: "waterFlow" },
+    { label: "WATER TOTAL", key: "waterTotal" },
     { label: "TIME", key: "time" },
   ];
 
   const csv_data = [];
+  const exp_data = [];
   const Months = [
     "Jan",
     "Feb",
@@ -368,12 +369,41 @@ const Dashboards = ({
                 CLEAR
               </button>
 
+              {data.length > 0 &&
+                data.map((i, k) => {
+                  const tmpTime = i.time;
+                  const timeSplit = tmpTime.split(" ");
+                  const year = timeSplit[3];
+                  const time = timeSplit[4];
+                  const day = timeSplit[2];
+                  let tMonth = 0;
+                  for (let i = 0; i < Months.length; i++) {
+                    if (timeSplit[1] === Months[i]) {
+                      tMonth = i + 1;
+                    }
+                  }
+                  exp_data.push({
+                    no: k + 1,
+                    device_id: i.deviceId,
+                    name: boardName,
+                    temperature: i.temperature,
+                    humidity: i.humidity,
+                    ec: i.ec,
+                    ecTemp: i.ecTemp,
+                    ph: i.ph,
+                    phTemp: i.phTemp,
+                    waterFlow: i.waterFlow,
+                    waterTotal: i.waterTotal,
+                    time: `${day}/${tMonth}/${year} ${time}`,
+                  });
+                })}
+
               {data.length > 0 && (
                 <button className="btn">
                   <CSVLink
                     // className="btn"
                     style={{ textDecoration: "none", color: "white" }}
-                    data={csv_data}
+                    data={exp_data}
                     filename={`${boardName}_${boardId}_${day}_${nMonth}_${year}.csv`}
                     headers={headers}
                   >
@@ -383,15 +413,18 @@ const Dashboards = ({
               )}
             </div>
             <div className="box-table">
-              {boardData.length !== 0 && !boardData.message && (
-                <DataExport
-                  data={data}
-                  boardId={boardId}
-                  boardName={boardName}
-                  csv_data={csv_data}
-                  Months={Months}
-                  setNMonth={setNMonth}
-                />
+              {boardData.length !== 0 && (
+                <>
+                  <DataExport
+                    key={boardId}
+                    data={data}
+                    boardId={boardId}
+                    boardName={boardName}
+                    csv_data={csv_data}
+                    Months={Months}
+                    setNMonth={setNMonth}
+                  />
+                </>
               )}
             </div>
           </div>
