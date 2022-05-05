@@ -853,7 +853,7 @@ const THLine = ({ boardData, boardId }) => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: -90,
-            legend: "TIME",
+            legend: "",
             legendOffset: 36,
             legendPosition: "middle",
           }}
