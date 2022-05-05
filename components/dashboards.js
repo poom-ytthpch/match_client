@@ -2,9 +2,7 @@ import { useTable } from "react-table";
 import * as React from "react";
 import classnames from "classnames";
 import { ResponsiveLine } from "@nivo/line";
-import { ResponsiveBar } from "@nivo/bar";
 import DataExport from "./DataExport";
-import Box from "@mui/material/Box";
 // import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
@@ -498,7 +496,7 @@ const EcLine = ({ boardData, boardId }) => {
     }
     const tmpTime = i.time;
     const Time = tmpTime.split(" ");
-    dataTmp.push({ x: Time[4], y: Number(i.ec) });
+    dataTmp.push({ x: String(Time[4]), y: Number(i.ec) });
   });
   const data = [
     {
@@ -510,9 +508,9 @@ const EcLine = ({ boardData, boardId }) => {
   return (
     <>
       <div>
-        <h3>
+        <h4>
           AVG EC: {Math.floor(avgEc)} MAX: {max} MIN: {min}
-        </h3>
+        </h4>
         <h5>
           LAST UPDATE {lastTime[2]}/{tmpMonth}/{lastTime[3]}
         </h5>
@@ -524,10 +522,9 @@ const EcLine = ({ boardData, boardId }) => {
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
-            min: 0,
-            max: max + 600,
-            stacked: false,
-            reverse: false,
+            min: min - 50,
+            max: max + 50,
+            stacked: true,
           }}
           yFormat=" >-.2f"
           curve="basis"
@@ -538,7 +535,7 @@ const EcLine = ({ boardData, boardId }) => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: -90,
-            legend: "TIME",
+            legend: "",
             legendOffset: 36,
             legendPosition: "middle",
           }}
@@ -555,10 +552,11 @@ const EcLine = ({ boardData, boardId }) => {
           enablePoints={false}
           colors={{ scheme: "purple_orange" }}
           pointSize={10}
-          pointColor={{ theme: "background" }}
+          // pointColor={{ theme: "background" }}
           pointBorderWidth={2}
           pointBorderColor={{ from: "serieColor" }}
           pointLabelYOffset={-12}
+          isInteractive={true}
           useMesh={true}
           legends={[
             {
@@ -658,7 +656,7 @@ const PhLine = ({ boardData, boardId }) => {
   return (
     <>
       <div>
-        <h3>AVG PH: {avgPh.toFixed(1)}</h3>
+        <h4>AVG PH: {avgPh.toFixed(1)}</h4>
         <h5>
           LAST UPDATE {lastTime[2]}/{tmpMonth}/{lastTime[3]}
         </h5>
@@ -798,6 +796,12 @@ const THLine = ({ boardData, boardId }) => {
     if (i.temperature > max) {
       max = Number(i.temperature);
     }
+    if (i.humidity > max) {
+      max = Number(i.humidity);
+    }
+    if (i.humidity < min) {
+      min = Number(i.humidity);
+    }
     if (i.temperature < min) {
       min = Number(i.temperature);
     }
@@ -821,9 +825,9 @@ const THLine = ({ boardData, boardId }) => {
   return (
     <>
       <div>
-        <h3>
+        <h4>
           AVG TEMPERATURE: {avgPh.toFixed(1)} MAX: {max} MIN: {min}
-        </h3>
+        </h4>
         <h5>
           LAST UPDATE {lastTime[2]}/{tmpMonth}/{lastTime[3]}
         </h5>
@@ -835,8 +839,8 @@ const THLine = ({ boardData, boardId }) => {
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
-            min: 0,
-            max: max + 50,
+            min: min - 5,
+            max: max + 5,
             stacked: false,
             reverse: false,
           }}

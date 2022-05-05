@@ -1096,7 +1096,7 @@ const Mqtt = ({ board }) => {
           <div className="mb-3 ">
             <div className="board-header">
               <p className="board-title">
-                BOARD NAME:{" "}
+                NAME:{" "}
                 {boardNameStatus ? (
                   <div className="mb-3 container set-name">
                     <input
@@ -1136,7 +1136,7 @@ const Mqtt = ({ board }) => {
                 )}
               </p>
               <p className="board-status">
-                BOARD STATUS:{" "}
+                STATUS:{" "}
                 {Disable ? (
                   <span className="offline">OFFLINE</span>
                 ) : (
@@ -1151,7 +1151,7 @@ const Mqtt = ({ board }) => {
                 </span>
               </p>
               <p className="time-box">
-                BOARD ID: <span className="time">{board.device_id}</span>
+                ID: <span className="time">{board.device_id}</span>
               </p>
               <div>
                 <FormControlLabel
@@ -1172,7 +1172,7 @@ const Mqtt = ({ board }) => {
               {/* /***************BOARD TEMP PROGRESS*********************/}
 
               <div>
-                <span className="title">BOARD TEMP</span>
+                <span className="title">TEMP</span>
                 <br></br>
                 <FormControlLabel
                   control={
@@ -1210,7 +1210,7 @@ const Mqtt = ({ board }) => {
                       },
                     }}
                     strokeWidth={10}
-                    text={`${board.datum.temperature} *C`}
+                    text={`${board.datum.temperature} *c`}
                   />
                 </div>
                 {board.fan ? (
@@ -1231,7 +1231,7 @@ const Mqtt = ({ board }) => {
               {/* /***************BOARD HUM PROGRESS*********************/}
 
               <div>
-                <span className="title">BOARD HUM</span>
+                <span className="title">HUM</span>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -1327,7 +1327,7 @@ const Mqtt = ({ board }) => {
                       },
                     }}
                     strokeWidth={10}
-                    text={`${board.datum.ph} PH`}
+                    text={`${board.datum.ph} pH`}
                   />
                 </div>
               </div>
@@ -1362,7 +1362,7 @@ const Mqtt = ({ board }) => {
                       },
                     }}
                     strokeWidth={10}
-                    text={`${board.datum.phTemp} *C`}
+                    text={`${board.datum.phTemp} *c`}
                   />
                 </div>
               </div>
@@ -1429,7 +1429,7 @@ const Mqtt = ({ board }) => {
                       },
                     }}
                     strokeWidth={10}
-                    text={`${board.datum.ec} MS`}
+                    text={`${board.datum.ec} us`}
                   />
                 </div>
               </div>
@@ -1464,7 +1464,7 @@ const Mqtt = ({ board }) => {
                       },
                     }}
                     strokeWidth={10}
-                    text={`${board.datum.ecTemp} *C`}
+                    text={`${board.datum.ecTemp} *c`}
                   />
                 </div>
               </div>
@@ -1517,7 +1517,7 @@ const Mqtt = ({ board }) => {
                       },
                     }}
                     strokeWidth={10}
-                    text={`${board.datum.waterFlow} L/H `}
+                    text={`${board.datum.waterFlow} l/h `}
                   />
                 </div>
                 {board.datum.waterFlow > 0 ? (
@@ -1555,7 +1555,7 @@ const Mqtt = ({ board }) => {
                       },
                     }}
                     strokeWidth={10}
-                    text={`${board.datum.waterTotal} L\n`}
+                    text={`${board.datum.waterTotal} l\n`}
                   />
                 </div>
               </div>
