@@ -5,11 +5,16 @@ import { ResponsiveLine } from "@nivo/line";
 import DataExport from "./DataExport";
 // import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import Cookies from "js-cookie";
+
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import { CSVLink, CSVDownload } from "react-csv";
+import { margin } from "@mui/system";
+import axios from "axios";
+const Swal = require("sweetalert2");
 
 const Dashboards = ({
   boards,
@@ -27,6 +32,7 @@ const Dashboards = ({
   setDate,
   date,
   setNMonth,
+  setBoardData,
   nMonth,
   year,
   day,
@@ -62,6 +68,9 @@ const Dashboards = ({
     "Nov",
     "Dec",
   ];
+  const server = "https://www.matchchemical.tk:4008/v1";
+
+  const [sDate, setSDate] = useState(new Date(Date.now()));
 
   const handleDate = (e) => {
     const tmpDate = e.toString();
@@ -72,6 +81,50 @@ const Dashboards = ({
     setDay(tmpSplit[2]);
 
     setDate(e);
+  };
+
+  const handleSelectDate = async (e) => {
+    const tmpDate = e.toString();
+    const tmpSplit = tmpDate.split(" ");
+
+    const year = tmpSplit[3];
+    const month = tmpSplit[1];
+    const day = tmpSplit[2];
+
+    await setSDate(e);
+    const wait = Swal.fire({
+      title: "PLEASE WAIT!",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    let nDate = month + " " + day + " " + year;
+    try {
+      axios
+        .get(`${server}/getDeviceDataSave/${boardId}/${String(nDate)}`, {
+          headers: {
+            "x-access-token": Cookies.get("_t_"),
+          },
+        })
+        .then((res) => {
+          wait.close();
+          if (res.data.model) {
+            setBoardData(res.data.model);
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: res.data.message,
+            });
+          }
+        });
+    } catch (error) {
+      console.log(error);
+      wait.close();
+    }
   };
 
   return (
@@ -215,6 +268,30 @@ const Dashboards = ({
 
       {boardData.length > 0 || boardData.message ? (
         <>
+          <div
+            style={{
+              textAlign: "center",
+              boxShadow: "0px 0px 8px 4px rgba(0, 0, 0, 0.1)",
+              margin: "10px",
+              padding: "20px",
+            }}
+          >
+            {boardData.length > 0 && (
+              <>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label="DATE"
+                    value={sDate}
+                    defaultValue={boardData[0].time}
+                    onChange={(e) => {
+                      handleSelectDate(e);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </>
+            )}
+          </div>
           <div className="box-chart">
             <div className="box-ec-chart">
               {boardId !== "" ? (

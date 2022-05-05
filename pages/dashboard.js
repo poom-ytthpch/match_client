@@ -80,7 +80,7 @@ const Dashboard = () => {
     });
     try {
       await axios
-        .get(`${server}/getDeviceDataSave/${device_id}`, {
+        .get(`${server}/getDeviceDataSave/${device_id}/non`, {
           headers: {
             "x-access-token": Cookies.get("_t_"),
           },
@@ -170,6 +170,7 @@ const Dashboard = () => {
             getDeviceDataSave={getDeviceDataSave}
             getDeviceDataByType={getDeviceDataByType}
             boardData={boardData}
+            setBoardData={setBoardData}
             boardId={boardId}
             boardName={boardName}
             data={data}
