@@ -205,6 +205,28 @@
           border-radius: 50%;
         }
 
+        .btn-outline-success {
+          animation: btn-animate 1s linear infinite;
+        }
+
+        @keyframes btn-animate {
+          0% {
+            border-color: #c1deb0;
+          }
+
+          25% {
+            border-color: #7bb274;
+          }
+
+          50% {
+            border-color: #418914;
+          }
+
+          75% {
+            border-color: #1c4701;
+          }
+        }
+
         #set {
           width: 100%;
           padding: 5px;

@@ -214,6 +214,41 @@
   border-radius: 50%;
 }
 
+.box_board .board .button-box .box .btn-outline-success {
+  -webkit-animation: btn-animate 1s linear infinite;
+          animation: btn-animate 1s linear infinite;
+}
+
+@-webkit-keyframes btn-animate {
+  0% {
+    border-color: #c1deb0;
+  }
+  25% {
+    border-color: #7bb274;
+  }
+  50% {
+    border-color: #418914;
+  }
+  75% {
+    border-color: #1c4701;
+  }
+}
+
+@keyframes btn-animate {
+  0% {
+    border-color: #c1deb0;
+  }
+  25% {
+    border-color: #7bb274;
+  }
+  50% {
+    border-color: #418914;
+  }
+  75% {
+    border-color: #1c4701;
+  }
+}
+
 .box_board .board .button-box .box #set {
   width: 100%;
   padding: 5px;
