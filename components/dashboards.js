@@ -112,6 +112,7 @@ const Dashboards = ({
         .then((res) => {
           wait.close();
           if (res.data.model) {
+            setBoardData([]);
             setBoardData(res.data.model);
           } else {
             Swal.fire({

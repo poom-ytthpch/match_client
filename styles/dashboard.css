@@ -258,6 +258,14 @@
   border: 1px solid black;
 }
 
+.box-chart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 .box-chart .box-ec-chart {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -272,7 +280,7 @@
   background-color: #ffffff10;
   -webkit-backdrop-filter: blur(12px);
           backdrop-filter: blur(12px);
-  height: 620px;
+  height: 640px;
 }
 
 .box-chart .box-ec-chart .dashboard-ec-chart {

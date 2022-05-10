@@ -86,6 +86,7 @@ const Dashboard = () => {
           },
         })
         .then((res) => {
+          setBoardData([]);
           setBoardData(res.data.model);
           setBoardId(device_id);
           setBoardName(device_name);
@@ -126,6 +127,7 @@ const Dashboard = () => {
           )
           .then((res) => {
             wait.close();
+            setData([]);
             if (res.data.model.length > 0) {
               setData(res.data.model);
             } else {

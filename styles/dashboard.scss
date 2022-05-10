@@ -221,12 +221,17 @@
 }
 
 .box-chart {
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // flex-wrap: wrap;
   // display: grid;
-
+  // grid-template-columns: repeat(2, 1fr);
+  // grid-gap: 10px;
+  // grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
+  // grid-row-start: 2;
+  display: flex;
+  // align-items: center;
+  // justify-content: space-evenly;
+  // flex-grow: 2;
+  flex-wrap: wrap;
+  // max-width: 800px;
   .box-ec-chart {
     display: flex;
     justify-content: center;
@@ -235,8 +240,9 @@
     border-radius: 10px;
     background-color: #ffffff10;
     backdrop-filter: blur(12px);
-    // max-width: 800px;
-    height: 620px;
+    // max-width: 600px;
+    // width: auto;
+    height: 640px;
     .dashboard-ec-chart {
       display: flex;
       // text-align: center;
