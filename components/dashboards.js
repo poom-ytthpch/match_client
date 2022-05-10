@@ -226,25 +226,61 @@ const Dashboards = ({
                       <td>{i.datum.phTemp}</td>
                       <td>{i.datum.ec}</td>
                       <td>{i.datum.ecTemp}</td>
-                      <td>{i.gpios[0].title}</td>
                       <td>
-                        {i.gpios[0].state === false ? (
+                        {
+                          i.gpios[
+                            i.gpios.findIndex((i) => {
+                              return i.index === 0;
+                            })
+                          ].title
+                        }
+                      </td>
+                      <td>
+                        {i.gpios[
+                          i.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].state === false ? (
                           <span className="offline">OFF</span>
                         ) : (
                           <span className="online">ON</span>
                         )}
                       </td>
-                      <td>{i.gpios[1].title}</td>
                       <td>
-                        {i.gpios[1].state === false ? (
+                        {
+                          i.gpios[
+                            i.gpios.findIndex((i) => {
+                              return i.index === 1;
+                            })
+                          ].title
+                        }
+                      </td>
+                      <td>
+                        {i.gpios[
+                          i.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].state === false ? (
                           <span className="offline">OFF</span>
                         ) : (
                           <span className="online">ON</span>
                         )}
                       </td>
-                      <td>{i.gpios[2].title}</td>
                       <td>
-                        {i.gpios[2].state === false ? (
+                        {
+                          i.gpios[
+                            i.gpios.findIndex((i) => {
+                              return i.index === 2;
+                            })
+                          ].title
+                        }
+                      </td>
+                      <td>
+                        {i.gpios[
+                          i.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].state === false ? (
                           <span className="offline">OFF</span>
                         ) : (
                           <span className="online">ON</span>
