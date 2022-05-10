@@ -258,14 +258,6 @@
   border: 1px solid black;
 }
 
-.box-chart {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
 .box-chart .box-ec-chart {
   display: -webkit-box;
   display: -ms-flexbox;
