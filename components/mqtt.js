@@ -1165,15 +1165,6 @@ const Mqtt = ({ board }) => {
                   disabled={Disable}
                   label="AUTO"
                 />
-              </div>
-            </div>
-
-            <div className="board-box">
-              {/* /***************BOARD TEMP PROGRESS*********************/}
-
-              <div>
-                <p className="title">TEMP</p>
-
                 <FormControlLabel
                   control={
                     <IOSSwitch
@@ -1185,6 +1176,15 @@ const Mqtt = ({ board }) => {
                   disabled={Disable}
                   label="FAN"
                 />
+              </div>
+            </div>
+
+            <div className="board-box">
+              {/* /***************BOARD TEMP PROGRESS*********************/}
+
+              <div>
+                <p className="title">TEMP</p>
+
                 <FormControlLabel
                   control={
                     <IOSSwitch
