@@ -457,10 +457,6 @@ const Mqtt = ({ board }) => {
           },
         });
 
-        if (!board.auto && board.datum.temperature <= 33) {
-          await updateFanState({ fan: false });
-        }
-
         await axios
           .patch(
             `${server}/updateAutoState`,
