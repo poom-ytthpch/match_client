@@ -1172,8 +1172,8 @@ const Mqtt = ({ board }) => {
               {/* /***************BOARD TEMP PROGRESS*********************/}
 
               <div>
-                <span className="title">TEMP</span>
-                <br></br>
+                <p className="title">TEMP</p>
+
                 <FormControlLabel
                   control={
                     <IOSSwitch
@@ -1184,6 +1184,32 @@ const Mqtt = ({ board }) => {
                   }
                   disabled={Disable}
                   label="FAN"
+                />
+                <FormControlLabel
+                  control={
+                    <IOSSwitch
+                      sx={{ m: 1 }}
+                      checked={
+                        board.sensors[
+                          board.sensors.findIndex((i) => {
+                            return i.index === 5;
+                          })
+                        ].state
+                      }
+                      onChange={(e) =>
+                        updateSensorState(
+                          5,
+                          !board.sensors[
+                            board.sensors.findIndex((i) => {
+                              return i.index === 5;
+                            })
+                          ].state
+                        )
+                      }
+                    />
+                  }
+                  disabled={Disable}
+                  label="TH SENSOR"
                 />
 
                 <div className="progress-box">
@@ -1750,7 +1776,7 @@ const Mqtt = ({ board }) => {
                   ) : (
                     <button
                       type="button"
-                      className="btn btn-outline-success"
+                      className="btn btn-outline-success blynk"
                       onClick={() => updateGpioState(0, 0)}
                       disabled={
                         Disable ||
@@ -2531,7 +2557,7 @@ const Mqtt = ({ board }) => {
                   ) : (
                     <button
                       type="button"
-                      className="btn btn-outline-success"
+                      className="btn btn-outline-success blynk"
                       onClick={() => updateGpioState(1, 0)}
                       disabled={
                         Disable ||
@@ -3312,7 +3338,7 @@ const Mqtt = ({ board }) => {
                   ) : (
                     <button
                       type="button"
-                      className="btn btn-outline-success"
+                      className="btn btn-outline-success blynk"
                       onClick={() => updateGpioState(2, 0)}
                       disabled={
                         Disable ||
@@ -4031,7 +4057,7 @@ const Mqtt = ({ board }) => {
                   ) : (
                     <button
                       type="button"
-                      className="btn btn-outline-success"
+                      className="btn btn-outline-success blynk"
                       onClick={() => updateGpioState(3, 0)}
                       disabled={Disable}
                     >

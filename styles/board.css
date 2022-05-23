@@ -214,7 +214,7 @@
   border-radius: 50%;
 }
 
-.box_board .board .button-box .box .btn-outline-success {
+.box_board .board .button-box .box .blynk {
   -webkit-animation: btn-animate 1s linear infinite;
           animation: btn-animate 1s linear infinite;
 }
