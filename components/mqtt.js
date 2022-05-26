@@ -2283,7 +2283,16 @@ const Mqtt = ({ board }) => {
                       aria-describedby="alert-dialog-description"
                     >
                       <DialogTitle id="alert-dialog-title">
-                        <h2>TIMER RELAY 1</h2>
+                        <h2>
+                          TIMER{" "}
+                          {
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 0;
+                              })
+                            ].title
+                          }
+                        </h2>
                       </DialogTitle>
                       <DialogContent>
                         <DialogContentText id="alert-dialog-description">
@@ -3064,7 +3073,16 @@ const Mqtt = ({ board }) => {
                       aria-describedby="alert-dialog-description"
                     >
                       <DialogTitle id="alert-dialog-title">
-                        <h2>TIMER RELAY 2</h2>
+                        <h2>
+                          TIMER{" "}
+                          {
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].title
+                          }
+                        </h2>
                       </DialogTitle>
                       <DialogContent>
                         <DialogContentText id="alert-dialog-description">
@@ -3845,7 +3863,16 @@ const Mqtt = ({ board }) => {
                       aria-describedby="alert-dialog-description"
                     >
                       <DialogTitle id="alert-dialog-title">
-                        <h2>TIMER RELAY 3</h2>
+                        <h2>
+                          TIMER{" "}
+                          {
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].title
+                          }
+                        </h2>
                       </DialogTitle>
                       <DialogContent>
                         <DialogContentText id="alert-dialog-description">
