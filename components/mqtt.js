@@ -1147,7 +1147,8 @@ const Mqtt = ({ board }) => {
                 </span>
               </p>
               <p className="time-box">
-                ID: <span className="time">{board.device_id}</span>
+                ID: <span className="time">{board.device_id}</span> VERSION:{" "}
+                <span className="time">{board.version}</span>
               </p>
               <div>
                 <FormControlLabel
