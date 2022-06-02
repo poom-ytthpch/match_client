@@ -28,16 +28,17 @@ const DataExport = ({
           <thead>
             <tr>
               <th>NO.</th>
-              <th>BOARD ID</th>
-              <th>BOARD NAME</th>
-              <th>BOARD TEMP</th>
-              <th>BOARD HUM</th>
+              <th>DEVICE ID</th>
+              <th>DEVICE NAME</th>
+              <th>DEVICE TEMP</th>
+              <th>DEVICE HUM</th>
               <th>PH</th>
               <th>PH TEMP</th>
               <th>EC</th>
               <th>EC TEMP</th>
               <th>WATER FLOW</th>
               <th>WATER TOTAL</th>
+              <th>DATE</th>
               <th>TIME</th>
             </tr>
           </thead>
@@ -49,6 +50,7 @@ const DataExport = ({
             const time = timeSplit[4];
             const day = timeSplit[2];
             let tMonth = 0;
+            let month = "";
             {
               /* console.log(i.time); */
             }
@@ -57,7 +59,15 @@ const DataExport = ({
                 tMonth = i + 1;
               }
             }
+
+            month = String(tMonth);
             setNMonth(tMonth);
+            console.log(month.length);
+            if (month.length == 1) {
+              month = String(0) + String(tMonth);
+            } else {
+              month = String(tMonth);
+            }
 
             return (
               <tbody key={i.device_id}>
@@ -73,9 +83,8 @@ const DataExport = ({
                   <td>{i.ecTemp}</td>
                   <td>{i.waterFlow}</td>
                   <td>{i.waterTotal}</td>
-                  <td>
-                    {day}/{tMonth}/{year} {time}
-                  </td>
+                  <td>{`${year}-${month}-${day}`}</td>
+                  <td>{time}</td>
                 </tr>
               </tbody>
             );

@@ -39,16 +39,17 @@ const Dashboards = ({
 }) => {
   const headers = [
     { label: "No.", key: "no" },
-    { label: "BOARD ID", key: "device_id" },
-    { label: "BOARD NAME", key: "name" },
-    { label: "BOARD TEMP", key: "temperature" },
-    { label: "BOARD HUM", key: "humidity" },
+    { label: "DEVICE ID", key: "device_id" },
+    { label: "DEVICE NAME", key: "name" },
+    { label: "DEVICE TEMP", key: "temperature" },
+    { label: "DEVICE HUM", key: "humidity" },
     { label: "PH", key: "ph" },
     { label: "PH TEMP", key: "phTemp" },
     { label: "EC", key: "ec" },
     { label: "EC TEMP", key: "ecTemp" },
     { label: "WATER FLOW", key: "waterFlow" },
     { label: "WATER TOTAL", key: "waterTotal" },
+    { label: "DATE", key: "date" },
     { label: "TIME", key: "time" },
   ];
 
@@ -489,10 +490,17 @@ const Dashboards = ({
                   const time = timeSplit[4];
                   const day = timeSplit[2];
                   let tMonth = 0;
+                  let month = "";
                   for (let i = 0; i < Months.length; i++) {
                     if (timeSplit[1] === Months[i]) {
                       tMonth = i + 1;
                     }
+                  }
+                  month = String(tMonth);
+                  if (month.length == 1) {
+                    month = String(0) + String(tMonth);
+                  } else {
+                    month = String(tMonth);
                   }
                   exp_data.push({
                     no: k + 1,
@@ -506,7 +514,8 @@ const Dashboards = ({
                     phTemp: i.phTemp,
                     waterFlow: i.waterFlow,
                     waterTotal: i.waterTotal,
-                    time: `${day}/${tMonth}/${year} ${time}`,
+                    date: `${year}-${month}-${day}`,
+                    time: time,
                   });
                 })}
 
