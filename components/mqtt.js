@@ -1151,6 +1151,11 @@ const Mqtt = ({ board }) => {
                 <span className="time">{board.current}</span>
               </p>
               <div>
+                {!board.auto && (
+                  <div className="alert">
+                    <span>AUTO DISABLE</span>
+                  </div>
+                )}
                 <FormControlLabel
                   control={
                     <IOSSwitch
