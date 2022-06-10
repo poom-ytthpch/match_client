@@ -15,6 +15,7 @@ import { CSVLink, CSVDownload } from "react-csv";
 import { margin } from "@mui/system";
 import axios from "axios";
 const Swal = require("sweetalert2");
+const server_config = require("../config/config");
 
 const Dashboards = ({
   boards,
@@ -69,7 +70,7 @@ const Dashboards = ({
     "Nov",
     "Dec",
   ];
-  const server = "https://www.matchchemical.tk:4008/v1";
+  const server = server_config.host;
 
   const [sDate, setSDate] = useState(new Date(Date.now()));
 

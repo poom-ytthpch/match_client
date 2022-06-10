@@ -11,6 +11,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 const Swal = require("sweetalert2");
+const server_config = require("../config/config");
+
 export default function Board() {
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState([]);
@@ -28,8 +30,7 @@ export default function Board() {
   // const server = "https://www.matchchemical.tk:57524";
   // const server = "http://localhost:4002";
   // const server = "http://localhost:4008/v1";
-  const server = "https://www.matchchemical.tk:4008/v1";
-
+  const server = server_config.host;
 
   const usServer = "https://userlogapi.herokuapp.com"; //userServer
   // const usServer = "https://www.matchchemical.tk:57521";

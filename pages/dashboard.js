@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 const Swal = require("sweetalert2");
+const server_config = require("../config/config");
 
 const Dashboard = () => {
   const [boards, setBoards] = useState([]);
@@ -26,7 +27,7 @@ const Dashboard = () => {
   // const server = "http://localhost:4003";
 
   // const server = "http://localhost:4008/v1";
-  const server = "https://www.matchchemical.tk:4008/v1";
+  const server = server_config.host;
 
   useEffect(() => {
     const Verify = async () => {

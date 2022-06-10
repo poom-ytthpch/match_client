@@ -6,6 +6,7 @@ import Link from "next/link";
 import dayjs from "dayjs";
 const Swal = require("sweetalert2");
 import Head from "next/head";
+const server_config = require("../config/config");
 
 const Login = () => {
   const [now, setNow] = useState("");
@@ -17,8 +18,7 @@ const Login = () => {
   // const server = "https://www.matchchemical.tk:57521";
   // const server = "http://localhost:4008/v1";
   // const server = "https://home420.trueddns.com:57527/v1";
-  const server = "https://www.matchchemical.tk:4008/v1";
-
+  const server = server_config.host;
 
   useEffect(() => {
     const Verify = async () => {
@@ -119,7 +119,7 @@ const Login = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "ERROR : " + err,
+          text: "SERVER ERROR",
         });
       }
     } else {

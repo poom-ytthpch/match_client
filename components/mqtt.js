@@ -30,6 +30,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+const server_config = require("../config/config");
 
 import { color } from "@mui/system";
 
@@ -39,7 +40,7 @@ import { color } from "@mui/system";
 
 // const server = "http://localhost:4008/v1";
 // const server = "https://home420.trueddns.com:57527/v1";
-const server = "https://www.matchchemical.tk:4008/v1";
+const server = server_config.host;
 
 const Mqtt = ({ board }) => {
   if (board.ph !== null || board.ec !== null) {
