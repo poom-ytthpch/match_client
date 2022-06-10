@@ -30,6 +30,7 @@ export default function Board() {
   // const server = "http://localhost:4008/v1";
   const server = "https://www.matchchemical.tk:4008/v1";
 
+
   const usServer = "https://userlogapi.herokuapp.com"; //userServer
   // const usServer = "https://www.matchchemical.tk:57521";
 
@@ -97,11 +98,6 @@ export default function Board() {
     }
   };
 
-  const getCompany = () => {
-    axios.get(`${usServer}/company`).then((res) => {
-      setCompany(res.data);
-    });
-  };
   const getBoardCompany = async () => {
     const tmpToken = await Cookies.get("token");
     const decode = await jwt.decode(tmpToken);

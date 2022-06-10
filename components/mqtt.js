@@ -315,9 +315,7 @@ const Mqtt = ({ board }) => {
           Swal.showLoading();
         },
       });
-      await handleOpenTimer(1);
-      await handleOpenTimer(2);
-      await handleOpenTimer(3);
+
       try {
         await axios
           .delete(`${server}/deleteTimer/${timer_id}/${gpio_id}`, {
