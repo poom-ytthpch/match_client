@@ -1,3 +1,3 @@
 module.exports = {
-  host: "https://www.matchchemical.tk:4008/v1",
+  host: "https://server.matchchemicals.com:4008/v1",
 };
