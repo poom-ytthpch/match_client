@@ -119,7 +119,9 @@ const Login = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: `SERVER ERROR PLEASE TRY PERMISS THIS SITE <a href="https://server.matchchemicals.com:4008/">server.matchchemicals.com</a>`,
+          html:
+            "SERVER ERROR PLEASE TRY PERMISS THIS SITE" +
+            '<a href="//server.matchchemicals.com:4008/">server.matchchemicals.com</a>',
         });
       }
     } else {
