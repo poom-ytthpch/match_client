@@ -1,3 +1,3 @@
 module.exports = {
-  host: "https://auth.matchchemicals.com/v1",
+  host: "https://api.matchchemicals.com/v1",
 };
