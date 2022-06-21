@@ -162,9 +162,9 @@ const Dashboard = () => {
   } else {
     return (
       <div>
-        <div className="dashboard-header">
-          <p className="mt-2">TOTAL BOARD : {boards.length}</p>
-        </div>
+        {/* <div className="dashboard-header">
+          <p className="mt-2">DEVICE : {boards.length}</p>
+        </div> */}
         <div>
           <Dashboards
             key={boardId}
