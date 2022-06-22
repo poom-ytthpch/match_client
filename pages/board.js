@@ -74,6 +74,13 @@ export default function Board() {
           }
         });
     } catch (error) {
+      if (error.response.status === 401 || error.response.status === "401") {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Token is expired please logout and login again",
+        });
+      }
       console.log(error);
     }
   };
