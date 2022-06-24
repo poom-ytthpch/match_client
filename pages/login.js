@@ -13,6 +13,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [online, setOnline] = useState(true);
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
   // const server = "https://userlogapi.herokuapp.com";
   // const server = "https://www.matchchemical.tk:57521";
@@ -22,6 +24,10 @@ const Login = () => {
 
   useEffect(() => {
     const Verify = async () => {
+      await navigator.geolocation.getCurrentPosition(function (position) {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+      });
       await cookieCheck();
     };
     if (cookie.get("_t_")) {
@@ -97,6 +103,8 @@ const Login = () => {
           .post(`${server}/login`, {
             email: email,
             password: password,
+            latitude: latitude,
+            longitude: longitude,
           })
           .then((res) => {
             if (res.data.status) {
