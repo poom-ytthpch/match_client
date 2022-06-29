@@ -1185,6 +1185,18 @@ const Mqtt = ({ board }) => {
 
               <div>
                 <p className="title">TEMP</p>
+                <p>
+                  STATUS:
+                  {board.sensors[
+                    board.sensors.findIndex((i) => {
+                      return i.index === 5;
+                    })
+                  ].status ? (
+                    <span style={{ color: "green" }}>CONNECTED</span>
+                  ) : (
+                    <span style={{ color: "red" }}>NOT CONNECT</span>
+                  )}
+                </p>
 
                 <FormControlLabel
                   control={
@@ -1295,6 +1307,18 @@ const Mqtt = ({ board }) => {
 
               <div>
                 <span className="title">PH</span>
+                <p>
+                  STATUS:
+                  {board.sensors[
+                    board.sensors.findIndex((i) => {
+                      return i.index === 1;
+                    })
+                  ].status ? (
+                    <span style={{ color: "green" }}>CONNECTED</span>
+                  ) : (
+                    <span style={{ color: "red" }}>NOT CONNECT</span>
+                  )}
+                </p>
                 <div>
                   <FormControlLabel
                     control={
@@ -1398,6 +1422,18 @@ const Mqtt = ({ board }) => {
 
               <div>
                 <p className="title">EC</p>
+                <p>
+                  STATUS:
+                  {board.sensors[
+                    board.sensors.findIndex((i) => {
+                      return i.index === 2;
+                    })
+                  ].status ? (
+                    <span style={{ color: "green" }}>CONNECTED</span>
+                  ) : (
+                    <span style={{ color: "red" }}>NOT CONNECT</span>
+                  )}
+                </p>
                 <div>
                   <FormControlLabel
                     control={
@@ -1499,6 +1535,18 @@ const Mqtt = ({ board }) => {
 
               <div>
                 <p className="title">WATER FLOW</p>
+                <p>
+                  STATUS:
+                  {board.sensors[
+                    board.sensors.findIndex((i) => {
+                      return i.index === 3;
+                    })
+                  ].status ? (
+                    <span style={{ color: "green" }}>CONNECTED</span>
+                  ) : (
+                    <span style={{ color: "red" }}>NOT CONNECT</span>
+                  )}
+                </p>
                 <div>
                   <FormControlLabel
                     control={

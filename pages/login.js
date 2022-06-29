@@ -28,6 +28,7 @@ const Login = () => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
       });
+
       await cookieCheck();
     };
     if (cookie.get("_t_")) {
