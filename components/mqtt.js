@@ -1492,7 +1492,7 @@ const Mqtt = ({ board }) => {
                       },
                     }}
                     strokeWidth={10}
-                    text={`${board.datum.ec} us`}
+                    text={`${board.datum.ec} us/cm`}
                   />
                 </div>
               </div>
