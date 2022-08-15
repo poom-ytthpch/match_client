@@ -128,10 +128,10 @@ const Login = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          html:
-            "SERVER ERROR PLEASE TRY TO PERMISSION THIS SITE" +
-            "<br></br>" +
-            '<a href="//server.matchchemicals.com:4008/">server.matchchemicals.com</a>',
+          html: "500 Internal server error",
+          // "SERVER ERROR PLEASE TRY TO PERMISSION THIS SITE" +
+          // "<br></br>" +
+          // '<a href="//server.matchchemicals.com:4008/">server.matchchemicals.com</a>',
         });
       }
     } else {
