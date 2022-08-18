@@ -1531,9 +1531,91 @@ const Mqtt = ({ board }) => {
                   />
                 </div>
               </div>
+
+              {/* WATER LEVEL */}
+              {board.water_levels.length > 0 && (
+                <>
+                  {/* SCL TANK */}
+                  <div>
+                    <p className="title">SCL TANK</p>
+                    <p>
+                      STATUS:
+                      {board.water_levels[0].status ? (
+                        <span style={{ color: "green" }}>CONNECTED</span>
+                      ) : (
+                        <span style={{ color: "red" }}>NOT CONNECT</span>
+                      )}
+                    </p>
+
+                    <div className="progress-box">
+                      <CircularProgressbar
+                        value={board.water_levels[0].scl}
+                        maxValue={100}
+                        circleRatio={0.7}
+                        styles={{
+                          trail: {
+                            strokeLinecap: "butt",
+                            transform: "rotate(-126deg)",
+                            transformOrigin: "center center",
+                          },
+
+                          path: {
+                            strokeLinecap: "butt",
+                            transform: "rotate(-126deg)",
+                            transformOrigin: "center center",
+                            stroke: "#5c459b",
+                          },
+                          text: {
+                            fill: "#05ace3",
+                            fontSize: "12px",
+                          },
+                        }}
+                        strokeWidth={10}
+                        text={`${board.water_levels[0].scl} %`}
+                      />
+                    </div>
+                  </div>
+
+                  {/* BCL TANK */}
+                  <div>
+                    <span className="title">BCL TANK</span>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <div className="progress-box">
+                      <CircularProgressbar
+                        value={board.water_levels[0].bcl}
+                        maxValue={100}
+                        circleRatio={0.7}
+                        styles={{
+                          trail: {
+                            strokeLinecap: "butt",
+                            transform: "rotate(-126deg)",
+                            transformOrigin: "center center",
+                          },
+
+                          path: {
+                            strokeLinecap: "butt",
+                            transform: "rotate(-126deg)",
+                            transformOrigin: "center center",
+                            stroke: "#5c459b",
+                          },
+                          text: {
+                            fill: "#05ace3",
+                            fontSize: "12px",
+                          },
+                        }}
+                        strokeWidth={10}
+                        text={`${board.water_levels[0].bcl} %`}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
               {/* /***************WATER FLOW PROGRESS*********************/}
 
-              <div>
+              {/* <div>
                 <p className="title">WATER FLOW</p>
                 <p>
                   STATUS:
@@ -1600,10 +1682,10 @@ const Mqtt = ({ board }) => {
                 ) : (
                   <span style={{ color: "red" }}>Water Not Flow</span>
                 )}
-              </div>
+              </div> */}
               {/* /***************WATER TOTAL PROGRESS*********************/}
 
-              <div>
+              {/* <div>
                 <p className="title">WATER TOTAL</p>
                 <br />
                 <div className="progress-box">
@@ -1633,7 +1715,7 @@ const Mqtt = ({ board }) => {
                     text={`${board.datum.waterTotal} l\n`}
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="button-box">
