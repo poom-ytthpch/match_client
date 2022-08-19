@@ -18,21 +18,26 @@ import Checkbox from "@mui/material/Checkbox";
 import Select from "@mui/material/Select";
 import FormHelperText from "@mui/material/FormHelperText";
 import Switch from "@mui/material/Switch";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { styled, useTheme } from "@mui/material/styles";
 
+import LinearProgress from "@mui/material/LinearProgress";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Slider from "@mui/material/Slider";
+
 const server_config = require("../config/config");
 
 import { color } from "@mui/system";
+import { useRowState } from "react-table";
+import { NonceProvider } from "react-select";
 
 // const server = "https://boardapi.herokuapp.com";
 // const server = "https://www.matchchemical.tk:57524";
@@ -63,6 +68,67 @@ const Mqtt = ({ board }) => {
     const [relay1TimerOpen, setRelay1TimerOpen] = useState(false);
     const [relay2TimerOpen, setRelay2TimerOpen] = useState(false);
     const [relay3TimerOpen, setRelay3TimerOpen] = useState(false);
+
+    const PrettoSlider = styled(Slider)({
+      color: "#0ca3dd ",
+      height: 150,
+      width: 120,
+      marks: {
+        color: "red",
+      },
+      "& .MuiSlider-track": {
+        border: "none",
+      },
+      "& .MuiSlider-thumb": {
+        // display: "none",
+        height: 15,
+        width: 15,
+        backgroundColor: "#fff",
+        border: "2px solid currentColor",
+        "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
+          boxShadow: "inherit",
+        },
+        "&:before": {
+          display: "none",
+        },
+      },
+      "& .MuiSlider-valueLabel": {
+        lineHeight: 1.2,
+        fontSize: 12,
+        background: "unset",
+        padding: 0,
+        width: 32,
+        height: 32,
+        borderRadius: "50% 50% 50% 0",
+        backgroundColor: "#0ca3dd",
+        transformOrigin: "bottom left",
+        transform: "translate(175%, -100%) rotate(-45deg) scale(0)",
+        "&:before": { display: "none" },
+        "&.MuiSlider-valueLabelOpen": {
+          transform: "translate(175%, -150%) rotate(-45deg) scale(1)",
+        },
+        "& > *": {
+          transform: "rotate(45deg)",
+        },
+      },
+    });
+
+    const marks = [
+      {
+        value: 0,
+        label: "0%",
+      },
+
+      {
+        value: 50,
+        label: "50%",
+      },
+
+      {
+        value: 100,
+        label: "100%",
+      },
+    ];
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -975,6 +1041,12 @@ const Mqtt = ({ board }) => {
       setRelay3Days(typeof value === "string" ? value.split(",") : value);
     };
 
+    const styles = (theme) => ({
+      disabledButton: {
+        backgroundColor: theme.palette.primary || "red",
+        color: theme.palette.primary || "red",
+      },
+    });
     const IOSSwitch = styled((props) => (
       <Switch
         focusVisibleClassName=".Mui-focusVisible"
@@ -1548,31 +1620,15 @@ const Mqtt = ({ board }) => {
                     </p>
 
                     <div className="progress-box">
-                      <CircularProgressbar
-                        value={board.water_levels[0].scl}
-                        maxValue={100}
-                        circleRatio={0.7}
-                        styles={{
-                          trail: {
-                            strokeLinecap: "butt",
-                            transform: "rotate(-126deg)",
-                            transformOrigin: "center center",
-                          },
-
-                          path: {
-                            strokeLinecap: "butt",
-                            transform: "rotate(-126deg)",
-                            transformOrigin: "center center",
-                            stroke: "#5c459b",
-                          },
-                          text: {
-                            fill: "#05ace3",
-                            fontSize: "12px",
-                          },
-                        }}
-                        strokeWidth={10}
-                        text={`${board.water_levels[0].scl} %`}
-                      />
+                      <div>
+                        <PrettoSlider
+                          valueLabelDisplay="auto"
+                          aria-label="pretto slider"
+                          orientation="vertical"
+                          value={board.water_levels[0].scl}
+                          marks={marks}
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -1583,31 +1639,15 @@ const Mqtt = ({ board }) => {
                     <br></br>
                     <br></br>
                     <div className="progress-box">
-                      <CircularProgressbar
-                        value={board.water_levels[0].bcl}
-                        maxValue={100}
-                        circleRatio={0.7}
-                        styles={{
-                          trail: {
-                            strokeLinecap: "butt",
-                            transform: "rotate(-126deg)",
-                            transformOrigin: "center center",
-                          },
-
-                          path: {
-                            strokeLinecap: "butt",
-                            transform: "rotate(-126deg)",
-                            transformOrigin: "center center",
-                            stroke: "#5c459b",
-                          },
-                          text: {
-                            fill: "#05ace3",
-                            fontSize: "12px",
-                          },
-                        }}
-                        strokeWidth={10}
-                        text={`${board.water_levels[0].bcl} %`}
-                      />
+                      <div>
+                        <PrettoSlider
+                          valueLabelDisplay="auto"
+                          aria-label="pretto slider"
+                          orientation="vertical"
+                          value={board.water_levels[0].bcl}
+                          marks={marks}
+                        />
+                      </div>
                     </div>
                   </div>
                 </>
