@@ -1620,15 +1620,18 @@ const Mqtt = ({ board }) => {
                     </p>
 
                     <div className="progress-box">
-                      <div>
-                        <PrettoSlider
-                          valueLabelDisplay="auto"
-                          aria-label="pretto slider"
-                          orientation="vertical"
-                          value={board.water_levels[0].scl}
-                          marks={marks}
-                        />
-                      </div>
+                      <PrettoSlider
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        valueLabelDisplay="auto"
+                        aria-label="pretto slider"
+                        orientation="vertical"
+                        value={board.water_levels[0].scl}
+                        marks={marks}
+                      />
                     </div>
                   </div>
 
@@ -1641,6 +1644,11 @@ const Mqtt = ({ board }) => {
                     <div className="progress-box">
                       <div>
                         <PrettoSlider
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
                           valueLabelDisplay="auto"
                           aria-label="pretto slider"
                           orientation="vertical"
