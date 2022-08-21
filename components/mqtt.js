@@ -70,7 +70,11 @@ const Mqtt = ({ board }) => {
     const [relay3TimerOpen, setRelay3TimerOpen] = useState(false);
 
     const PrettoSlider = styled(Slider)({
-      color: !board.water_levels[0].status ? "#54545c" : "#0ca3dd ",
+      color: board.water_levels[0]
+        ? !board.water_levels[0].status
+          ? "#54545c"
+          : "#0ca3dd "
+        : "#54545c",
       height: 150,
       width: 120,
       marks: {
@@ -100,7 +104,11 @@ const Mqtt = ({ board }) => {
         width: 32,
         height: 32,
         borderRadius: "50% 50% 50% 0",
-        backgroundColor: !board.water_levels[0].status ? "#54545c" : "#0ca3dd ",
+        backgroundColor: board.water_levels[0]
+          ? !board.water_levels[0].status
+            ? "#54545c"
+            : "#0ca3dd "
+          : "#54545c",
         transformOrigin: "bottom left",
         transform: "translate(175%, -100%) rotate(-45deg) scale(0)",
         "&:before": { display: "none" },
@@ -1605,7 +1613,7 @@ const Mqtt = ({ board }) => {
               </div>
 
               {/* WATER LEVEL */}
-              {board.water_levels.length > 0 && (
+              {board.water_levels.length > 0 && board.water_levels[0] && (
                 <>
                   {/* SCL TANK */}
                   <div>
