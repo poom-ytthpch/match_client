@@ -70,8 +70,16 @@ const Mqtt = ({ board }) => {
     const [relay3TimerOpen, setRelay3TimerOpen] = useState(false);
 
     const PrettoSlider = styled(Slider)({
-      color: board.water_levels[0]
-        ? !board.water_levels[0].status
+      color: board.sensors[
+        board.sensors.findIndex((i) => {
+          return i.index === 15;
+        })
+      ]
+        ? !board.sensors[
+            board.sensors.findIndex((i) => {
+              return i.index === 15;
+            })
+          ].status
           ? "#54545c"
           : "#0ca3dd "
         : "#54545c",
@@ -104,8 +112,16 @@ const Mqtt = ({ board }) => {
         width: 32,
         height: 32,
         borderRadius: "50% 50% 50% 0",
-        backgroundColor: board.water_levels[0]
-          ? !board.water_levels[0].status
+        backgroundColor: board.sensors[
+          board.sensors.findIndex((i) => {
+            return i.index === 15;
+          })
+        ]
+          ? !board.sensors[
+              board.sensors.findIndex((i) => {
+                return i.index === 15;
+              })
+            ].status
             ? "#54545c"
             : "#0ca3dd "
           : "#54545c",
@@ -1613,14 +1629,22 @@ const Mqtt = ({ board }) => {
               </div>
 
               {/* WATER LEVEL */}
-              {board.water_levels.length > 0 && board.water_levels[0] && (
+              {board.sensors[
+                board.sensors.findIndex((i) => {
+                  return i.index === 15;
+                })
+              ] && (
                 <>
                   {/* SCL TANK */}
                   <div>
                     <p className="title">SCL TANK</p>
                     <p>
                       STATUS:
-                      {board.water_levels[0].status ? (
+                      {board.sensors[
+                        board.sensors.findIndex((i) => {
+                          return i.index === 15;
+                        })
+                      ].status ? (
                         <span style={{ color: "green" }}>CONNECTED</span>
                       ) : (
                         <span style={{ color: "red" }}>NOT CONNECT</span>
@@ -1637,7 +1661,7 @@ const Mqtt = ({ board }) => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         orientation="vertical"
-                        value={board.water_levels[0].scl}
+                        value={board.datum.scl_tank}
                         marks={marks}
                       />
                     </div>
@@ -1659,7 +1683,7 @@ const Mqtt = ({ board }) => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         orientation="vertical"
-                        value={board.water_levels[0].bcl}
+                        value={board.datum.bcl_tank}
                         marks={marks}
                       />
                     </div>
