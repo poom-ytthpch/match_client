@@ -465,6 +465,28 @@ const Mqtt = ({ board }) => {
               alert.close();
             });
           break;
+        case "SCL_STATE":
+          await axios
+            .patch(
+              `${server}/updateGpioData`,
+              { device_id: board.device_id, gpio_id: id, sclState: payload },
+              { headers: { "x-access-token": Cookies.get("_t_") } }
+            )
+            .then(() => {
+              alert.close();
+            });
+          break;
+        case "BCL_STATE":
+          await axios
+            .patch(
+              `${server}/updateGpioData`,
+              { device_id: board.device_id, gpio_id: id, bclState: payload },
+              { headers: { "x-access-token": Cookies.get("_t_") } }
+            )
+            .then(() => {
+              alert.close();
+            });
+          break;
         case "MAX_MIN_PH_STATE":
           await axios
             .patch(
@@ -1651,6 +1673,40 @@ const Mqtt = ({ board }) => {
                       )}
                     </p>
 
+                    <div>
+                      <FormControlLabel
+                        control={
+                          <IOSSwitch
+                            sx={{ m: 1 }}
+                            checked={
+                              board.sensors[
+                                board.sensors.findIndex((i) => {
+                                  return i.index === 15;
+                                })
+                              ]
+                                ? board.sensors[
+                                    board.sensors.findIndex((i) => {
+                                      return i.index === 15;
+                                    })
+                                  ].state
+                                : false
+                            }
+                            onChange={(e) =>
+                              updateSensorState(
+                                15,
+                                !board.sensors[
+                                  board.sensors.findIndex((i) => {
+                                    return i.index === 15;
+                                  })
+                                ].state
+                              )
+                            }
+                          />
+                        }
+                        disabled={Disable}
+                        label="US SENSOR"
+                      />
+                    </div>
                     <div className="progress-box">
                       <PrettoSlider
                         sx={{
@@ -2145,6 +2201,86 @@ const Mqtt = ({ board }) => {
                         ].gpio_datum.ecState
                       }
                       label="TIMER"
+                    />
+
+                    <FormControlLabel
+                      control={
+                        <IOSSwitch
+                          sx={{ m: 1 }}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 0;
+                              })
+                            ].gpio_datum.sclState
+                          }
+                          onChange={(e) =>
+                            updateGpioData(
+                              "SCL_STATE",
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].gpio_datum.sclState,
+                              e.preventDefault()
+                            )
+                          }
+                        />
+                      }
+                      disabled={
+                        Disable ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.bclState
+                      }
+                      label="SCL"
+                    />
+
+                    <FormControlLabel
+                      control={
+                        <IOSSwitch
+                          sx={{ m: 1 }}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 0;
+                              })
+                            ].gpio_datum.bclState
+                          }
+                          onChange={(e) =>
+                            updateGpioData(
+                              "BCL_STATE",
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 0;
+                                })
+                              ].gpio_datum.bclState,
+                              e.preventDefault()
+                            )
+                          }
+                        />
+                      }
+                      disabled={
+                        Disable ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 0;
+                          })
+                        ].gpio_datum.sclState
+                      }
+                      label="BCL"
                     />
                   </div>
                 </div>
@@ -2936,6 +3072,86 @@ const Mqtt = ({ board }) => {
                       }
                       label="TIMER"
                     />
+
+                    <FormControlLabel
+                      control={
+                        <IOSSwitch
+                          sx={{ m: 1 }}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].gpio_datum.sclState
+                          }
+                          onChange={(e) =>
+                            updateGpioData(
+                              "SCL_STATE",
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].gpio_datum.sclState,
+                              e.preventDefault()
+                            )
+                          }
+                        />
+                      }
+                      disabled={
+                        Disable ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.bclState
+                      }
+                      label="SCL"
+                    />
+
+                    <FormControlLabel
+                      control={
+                        <IOSSwitch
+                          sx={{ m: 1 }}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 1;
+                              })
+                            ].gpio_datum.bclState
+                          }
+                          onChange={(e) =>
+                            updateGpioData(
+                              "BCL_STATE",
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 1;
+                                })
+                              ].gpio_datum.bclState,
+                              e.preventDefault()
+                            )
+                          }
+                        />
+                      }
+                      disabled={
+                        Disable ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 1;
+                          })
+                        ].gpio_datum.sclState
+                      }
+                      label="BCL"
+                    />
                   </div>
                 </div>
                 {/* ******************* Ph ******************* */}
@@ -3725,6 +3941,86 @@ const Mqtt = ({ board }) => {
                         ].gpio_datum.ecState
                       }
                       label="TIMER"
+                    />
+
+                    <FormControlLabel
+                      control={
+                        <IOSSwitch
+                          sx={{ m: 1 }}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].gpio_datum.sclState
+                          }
+                          onChange={(e) =>
+                            updateGpioData(
+                              "SCL_STATE",
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].gpio_datum.sclState,
+                              e.preventDefault()
+                            )
+                          }
+                        />
+                      }
+                      disabled={
+                        Disable ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.bclState
+                      }
+                      label="SCL"
+                    />
+
+                    <FormControlLabel
+                      control={
+                        <IOSSwitch
+                          sx={{ m: 1 }}
+                          checked={
+                            board.gpios[
+                              board.gpios.findIndex((i) => {
+                                return i.index === 2;
+                              })
+                            ].gpio_datum.bclState
+                          }
+                          onChange={(e) =>
+                            updateGpioData(
+                              "BCL_STATE",
+                              board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].id,
+                              !board.gpios[
+                                board.gpios.findIndex((i) => {
+                                  return i.index === 2;
+                                })
+                              ].gpio_datum.bclState,
+                              e.preventDefault()
+                            )
+                          }
+                        />
+                      }
+                      disabled={
+                        Disable ||
+                        board.gpios[
+                          board.gpios.findIndex((i) => {
+                            return i.index === 2;
+                          })
+                        ].gpio_datum.sclState
+                      }
+                      label="BCL"
                     />
                   </div>
                 </div>
