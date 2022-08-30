@@ -72,12 +72,12 @@ const Mqtt = ({ board }) => {
     const PrettoSlider = styled(Slider)({
       color: board.sensors[
         board.sensors.findIndex((i) => {
-          return i.index === 15;
+          return i.index === 6;
         })
       ]
         ? !board.sensors[
             board.sensors.findIndex((i) => {
-              return i.index === 15;
+              return i.index === 6;
             })
           ].status
           ? "#54545c"
@@ -114,12 +114,12 @@ const Mqtt = ({ board }) => {
         borderRadius: "50% 50% 50% 0",
         backgroundColor: board.sensors[
           board.sensors.findIndex((i) => {
-            return i.index === 15;
+            return i.index === 6;
           })
         ]
           ? !board.sensors[
               board.sensors.findIndex((i) => {
-                return i.index === 15;
+                return i.index === 6;
               })
             ].status
             ? "#54545c"
@@ -1653,7 +1653,7 @@ const Mqtt = ({ board }) => {
               {/* WATER LEVEL */}
               {board.sensors[
                 board.sensors.findIndex((i) => {
-                  return i.index === 15;
+                  return i.index === 6;
                 })
               ] && (
                 <>
@@ -1664,7 +1664,7 @@ const Mqtt = ({ board }) => {
                       STATUS:
                       {board.sensors[
                         board.sensors.findIndex((i) => {
-                          return i.index === 15;
+                          return i.index === 6;
                         })
                       ].status ? (
                         <span style={{ color: "green" }}>CONNECTED</span>
@@ -1681,22 +1681,22 @@ const Mqtt = ({ board }) => {
                             checked={
                               board.sensors[
                                 board.sensors.findIndex((i) => {
-                                  return i.index === 15;
+                                  return i.index === 6;
                                 })
                               ]
                                 ? board.sensors[
                                     board.sensors.findIndex((i) => {
-                                      return i.index === 15;
+                                      return i.index === 6;
                                     })
                                   ].state
                                 : false
                             }
                             onChange={(e) =>
                               updateSensorState(
-                                15,
+                                6,
                                 !board.sensors[
                                   board.sensors.findIndex((i) => {
-                                    return i.index === 15;
+                                    return i.index === 6;
                                   })
                                 ].state
                               )
