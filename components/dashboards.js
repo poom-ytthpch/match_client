@@ -412,7 +412,8 @@ const Dashboards = ({
                 <h2>PLEASE SELECT BOARD</h2>
               )}
             </div>
-            <div className="box-ec-chart">
+            {/* PH LINE CHART */}
+            {/* <div className="box-ec-chart">
               {boardId !== "" ? (
                 boardData.message ? (
                   <h1>{boardData.message}</h1>
@@ -436,7 +437,7 @@ const Dashboards = ({
               ) : (
                 <h1>PLEASE SELECT BOARD</h1>
               )}
-            </div>
+            </div> */}
           </div>
 
           <div className="DataExport">
