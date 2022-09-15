@@ -3,6 +3,7 @@ import * as React from "react";
 import classnames from "classnames";
 import { ResponsiveLine } from "@nivo/line";
 import DataExport from "./DataExport";
+
 // import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import Cookies from "js-cookie";
@@ -16,6 +17,7 @@ import { margin } from "@mui/system";
 import axios from "axios";
 const Swal = require("sweetalert2");
 const server_config = require("../config/config");
+import data_test from "./data.json";
 
 const Dashboards = ({
   boards,
@@ -621,12 +623,12 @@ const EcLine = ({ boardData, boardId }) => {
     }
     const tmpTime = i.time;
     const Time = tmpTime.split(" ");
-    dataTmp.push({ x: String(Time[4]), y: Number(i.ec) });
+    dataTmp.push({ x: String(Time[4].substr(0, 5)), y: Number(i.ec) });
   });
   const data = [
     {
-      id: b_name,
-      color: "hsl(353, 70%, 50%)",
+      id: "EC",
+      color: "hsl(271, 70%, 50%)",
       data: dataTmp,
     },
   ];
@@ -647,21 +649,22 @@ const EcLine = ({ boardData, boardId }) => {
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
-            min: min - 50,
-            max: max + 50,
+            min: min === 0 ? 0 : min - 25,
+            max: max + 20,
             stacked: true,
+            reverse: false,
           }}
           yFormat=" >-.2f"
-          curve="basis"
+          curve="natural"
           axisTop={null}
           axisRight={null}
           axisBottom={{
             orient: "bottom",
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: -70,
-            legend: "",
-            legendOffset: 36,
+            tickRotation: -45,
+            legend: "TIME",
+            legendOffset: 40,
             legendPosition: "middle",
           }}
           axisLeft={{
@@ -670,19 +673,21 @@ const EcLine = ({ boardData, boardId }) => {
             tickPadding: 5,
             tickRotation: 0,
             legend: "EC",
-            legendOffset: -40,
+            legendOffset: -50,
             legendPosition: "middle",
           }}
-          enableGridX={false}
-          enablePoints={false}
           colors={{ scheme: "purple_orange" }}
           pointSize={10}
-          // pointColor={{ theme: "background" }}
+          pointColor={{ theme: "background" }}
           pointBorderWidth={2}
           pointBorderColor={{ from: "serieColor" }}
           pointLabelYOffset={-12}
-          isInteractive={true}
-          useMesh={true}
+          areaBlendMode="multiply"
+          enableGridX={false}
+          enablePoints={false}
+          // useMesh={true}
+          // isInteractive={true}
+          animate={true}
           legends={[
             {
               anchor: "bottom-right",
@@ -709,6 +714,7 @@ const EcLine = ({ boardData, boardId }) => {
               ],
             },
           ]}
+          motionConfig="default"
         />
       </div>
 
@@ -899,8 +905,12 @@ const THLine = ({ boardData, boardId }) => {
   const stopTime = splitStopTime[4];
   let dataTmp = [];
   let data2Tmp = [];
-  let max = 0;
-  let min = 0;
+  let max = 0,
+    min = 0;
+  let max_hum = 0;
+  let min_hum = 0;
+  let max_temp = 0;
+  let min_temp = 0;
   let sumPh = 0;
   let avgPh = 0;
   for (let i = 0; i < boardData.length; i++) {
@@ -912,29 +922,48 @@ const THLine = ({ boardData, boardId }) => {
     if (b_name === "" && i.deviceId === boardId) {
       b_name = i.deviceId;
     }
-    if (max === 0) {
-      max = Number(i.temperature);
+    if (max_temp === 0) {
+      max_temp = Number(i.temperature);
     }
-    if (min === 0) {
-      min = Number(i.temperature);
+    if (min_temp === 0) {
+      min_temp = Number(i.temperature);
     }
-    if (i.temperature > max) {
-      max = Number(i.temperature);
+    if (max_hum === 0) {
+      max_hum = Number(i.humidity);
     }
-    if (i.humidity > max) {
-      max = Number(i.humidity);
+    if (min_hum === 0) {
+      min_hum = Number(i.humidity);
     }
-    if (i.humidity < min) {
-      min = Number(i.humidity);
+    if (i.temperature > max_temp) {
+      max_temp = Number(i.temperature);
     }
-    if (i.temperature < min) {
-      min = Number(i.temperature);
+    if (i.humidity > max_hum) {
+      max_hum = Number(i.humidity);
     }
+    if (i.humidity < min_hum) {
+      min_hum = Number(i.humidity);
+    }
+    if (i.temperature < min_temp) {
+      min_temp = Number(i.temperature);
+    }
+
     const tmpTime = i.time;
     const Time = tmpTime.split(" ");
-    dataTmp.push({ x: Time[4], y: Number(i.temperature) });
-    data2Tmp.push({ x: Time[4], y: Number(i.humidity) });
+    dataTmp.push({ x: Time[4].substr(0, 5), y: Number(i.temperature) });
+    data2Tmp.push({ x: Time[4].substr(0, 5), y: Number(i.humidity) });
   });
+
+  if (max_hum > max_temp) {
+    max = max_hum;
+  } else {
+    max = max_temp;
+  }
+  if (min_temp < min_hum) {
+    min = min_temp;
+  } else {
+    min = min_hum;
+  }
+
   const data = [
     {
       id: "TEMP",
@@ -950,9 +979,12 @@ const THLine = ({ boardData, boardId }) => {
   return (
     <>
       <div>
-        <h4>
-          AVG TEMPERATURE: {avgPh.toFixed(1)} MAX: {max} MIN: {min}
-        </h4>
+        <h4>AVG TEMPERATURE: {avgPh.toFixed(1)}</h4>
+        <h5>
+          {" "}
+          MAX_TEMP: {max_temp} MIN_TEMP: {min_temp} MAX_HUM: {max_hum} MIN_HUM:{" "}
+          {min_hum}
+        </h5>
         <h5>
           LAST UPDATE {lastTime[2]}/{tmpMonth}/{lastTime[3]}
         </h5>
@@ -964,22 +996,22 @@ const THLine = ({ boardData, boardId }) => {
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
-            min: min - 5,
+            min: min === 0 ? 0 : min - 5,
             max: max + 5,
             stacked: false,
             reverse: false,
           }}
           yFormat=" >-.2f"
-          curve="basis"
+          curve="natural"
           axisTop={null}
           axisRight={null}
           axisBottom={{
             orient: "bottom",
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: -70,
-            legend: "",
-            legendOffset: 36,
+            tickRotation: -45,
+            legend: "TIME",
+            legendOffset: 40,
             legendPosition: "middle",
           }}
           axisLeft={{
@@ -987,19 +1019,22 @@ const THLine = ({ boardData, boardId }) => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "TEMPERATURE",
-            legendOffset: -40,
+            legend: "TEMP_HUM",
+            legendOffset: -50,
             legendPosition: "middle",
           }}
-          enableGridX={false}
-          enablePoints={false}
           colors={{ scheme: "purple_orange" }}
           pointSize={10}
           pointColor={{ theme: "background" }}
           pointBorderWidth={2}
           pointBorderColor={{ from: "serieColor" }}
           pointLabelYOffset={-12}
-          useMesh={true}
+          areaBlendMode="multiply"
+          enableGridX={false}
+          enablePoints={false}
+          // useMesh={true}
+          // isInteractive={true}
+          animate={true}
           legends={[
             {
               anchor: "bottom-right",
@@ -1026,6 +1061,7 @@ const THLine = ({ boardData, boardId }) => {
               ],
             },
           ]}
+          motionConfig="default"
         />
       </div>
 
