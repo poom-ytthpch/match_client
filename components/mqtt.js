@@ -1904,13 +1904,17 @@ const Mqtt = ({ board }) => {
                         setRelay1Name(!relay1Name);
                       }}
                     >
-                      {
-                        board.gpios[
-                          board.gpios.findIndex((i) => {
-                            return i.index === 0;
-                          })
-                        ].title
-                      }
+                      {board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 0;
+                        })
+                      ].title === ""
+                        ? "R2"
+                        : board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 0;
+                            })
+                          ].title}
                     </p>
                   )}
 
@@ -2782,13 +2786,17 @@ const Mqtt = ({ board }) => {
                         setRelay2Name(!relay2Name);
                       }}
                     >
-                      {
-                        board.gpios[
-                          board.gpios.findIndex((i) => {
-                            return i.index === 1;
-                          })
-                        ].title
-                      }
+                      {board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 1;
+                        })
+                      ].title === ""
+                        ? "R2"
+                        : board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 1;
+                            })
+                          ].title}
                     </p>
                   )}
 
@@ -3660,13 +3668,17 @@ const Mqtt = ({ board }) => {
                         setRelay3Name(!relay3Name);
                       }}
                     >
-                      {
-                        board.gpios[
-                          board.gpios.findIndex((i) => {
-                            return i.index === 2;
-                          })
-                        ].title
-                      }
+                      {board.gpios[
+                        board.gpios.findIndex((i) => {
+                          return i.index === 2;
+                        })
+                      ].title === ""
+                        ? "R2"
+                        : board.gpios[
+                            board.gpios.findIndex((i) => {
+                              return i.index === 2;
+                            })
+                          ].title}
                     </p>
                   )}
 
